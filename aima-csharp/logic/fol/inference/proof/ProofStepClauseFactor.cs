@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Collections.ObjectModel;
 using aima.core.logic.fol.kb.data;
 using aima.core.logic.fol.parsing.ast;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace aima.core.logic.fol.inference.proof
 {
@@ -13,55 +13,55 @@ namespace aima.core.logic.fol.inference.proof
      */
     public class ProofStepClauseFactor : AbstractProofStep
     {
-	private List<ProofStep> predecessors = new List<ProofStep>();
-	private Clause factor = null;
-	private Clause factorOf = null;
-	private Literal lx = null;
-	private Literal ly = null;
-	private Dictionary<Variable, Term> subst = new Dictionary<Variable, Term>();
-	private Dictionary<Variable, Term> renameSubst = new Dictionary<Variable, Term>();
+        private readonly List<ProofStep> predecessors = new List<ProofStep>();
+        private readonly Clause factor = null;
+        private readonly Clause factorOf = null;
+        private readonly Literal lx = null;
+        private readonly Literal ly = null;
+        private readonly Dictionary<Variable, Term> subst = new Dictionary<Variable, Term>();
+        private readonly Dictionary<Variable, Term> renameSubst = new Dictionary<Variable, Term>();
 
-	public ProofStepClauseFactor(Clause factor, Clause factorOf, Literal lx,
-			Literal ly, Dictionary<Variable, Term> subst,
-			Dictionary<Variable, Term> renameSubst)
-	{
-	    this.factor = factor;
-	    this.factorOf = factorOf;
-	    this.lx = lx;
-	    this.ly = ly;
-	    
-	    foreach (Variable key in subst.Keys)
-	    {
-		this.subst.Add(key, subst[key]);
-	    }
+        public ProofStepClauseFactor(Clause factor, Clause factorOf, Literal lx,
+                Literal ly, Dictionary<Variable, Term> subst,
+                Dictionary<Variable, Term> renameSubst)
+        {
+            this.factor = factor;
+            this.factorOf = factorOf;
+            this.lx = lx;
+            this.ly = ly;
 
-	    foreach (Variable key in renameSubst.Keys)
-	    {
-		this.renameSubst.Add(key, renameSubst[key]);
-	    }
+            foreach (Variable key in subst.Keys)
+            {
+                this.subst.Add(key, subst[key]);
+            }
 
-	    this.predecessors.Add(factorOf.getProofStep());
-	}
+            foreach (Variable key in renameSubst.Keys)
+            {
+                this.renameSubst.Add(key, renameSubst[key]);
+            }
 
-	// START-ProofStep
+            predecessors.Add(factorOf.getProofStep());
+        }
 
-	public override List<ProofStep> getPredecessorSteps()
-	{
-	    return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
-	}
+        // START-ProofStep
 
-	public override String getProof()
-	{
-	    return factor.ToString();
-	}
+        public override List<ProofStep> getPredecessorSteps()
+        {
+            return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
+        }
 
-	public override String getJustification()
-	{
-	    return "Factor of " + factorOf.getProofStep().getStepNumber() + "  ["
-			    + lx + ", " + ly + "], subst=" + subst + ", renaming="
-			    + renameSubst;
-	}
+        public override String getProof()
+        {
+            return factor.ToString();
+        }
 
-	// END-ProofStep
+        public override String getJustification()
+        {
+            return "Factor of " + factorOf.getProofStep().getStepNumber() + "  ["
+                    + lx + ", " + ly + "], subst=" + subst + ", renaming="
+                    + renameSubst;
+        }
+
+        // END-ProofStep
     }
 }

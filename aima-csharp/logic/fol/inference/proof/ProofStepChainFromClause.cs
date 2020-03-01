@@ -1,8 +1,8 @@
+using aima.core.logic.fol.kb.data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Collections.ObjectModel;
-using aima.core.logic.fol.kb.data;
+using System.Linq;
 
 namespace aima.core.logic.fol.inference.proof
 {
@@ -12,34 +12,34 @@ namespace aima.core.logic.fol.inference.proof
      */
     public class ProofStepChainFromClause : AbstractProofStep
     {
-	private List<ProofStep> predecessors = new List<ProofStep>();
-	private Chain chain = null;
-	private Clause fromClause = null;
+        private readonly List<ProofStep> predecessors = new List<ProofStep>();
+        private readonly Chain chain = null;
+        private readonly Clause fromClause = null;
 
-	public ProofStepChainFromClause(Chain chain, Clause fromClause)
-	{
-	    this.chain = chain;
-	    this.fromClause = fromClause;
-	    this.predecessors.Add(fromClause.getProofStep());
-	}
+        public ProofStepChainFromClause(Chain chain, Clause fromClause)
+        {
+            this.chain = chain;
+            this.fromClause = fromClause;
+            predecessors.Add(fromClause.getProofStep());
+        }
 
-	// START-ProofStep
+        // START-ProofStep
 
-	public override List<ProofStep> getPredecessorSteps()
-	{
-	    return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
-	}
-	
-	public override String getProof()
-	{
-	    return chain.ToString();
-	}
-	
-	public override String getJustification()
-	{
-	    return "Chain from Clause: "
-			    + fromClause.getProofStep().getStepNumber();
-	}
-	// END-ProofStep
+        public override List<ProofStep> getPredecessorSteps()
+        {
+            return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
+        }
+
+        public override String getProof()
+        {
+            return chain.ToString();
+        }
+
+        public override String getJustification()
+        {
+            return "Chain from Clause: "
+                    + fromClause.getProofStep().getStepNumber();
+        }
+        // END-ProofStep
     }
 }

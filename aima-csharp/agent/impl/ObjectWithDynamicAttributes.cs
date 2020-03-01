@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 
 namespace aima.core.agent.impl
 {
@@ -9,9 +9,9 @@ namespace aima.core.agent.impl
      * @author Ravi Mohan
      * @author Ciaran O'Reilly
      */
-     public abstract class ObjectWithDynamicAttributes
+    public abstract class ObjectWithDynamicAttributes
     {
-        private Dictionary<Object, Object> attributes = new Dictionary<Object, Object>();
+        private readonly Dictionary<Object, Object> attributes = new Dictionary<Object, Object>();
 
         //PUBLIC METHODS
 
@@ -23,7 +23,7 @@ namespace aima.core.agent.impl
          */
         public String describeType()
         {
-            return this.GetType().Name;
+            return GetType().Name;
         }
 
         /**
@@ -118,7 +118,7 @@ namespace aima.core.agent.impl
 
             try
             {
-                copy = (ObjectWithDynamicAttributes)this.GetType().GetConstructor(System.Type.EmptyTypes).Invoke(null);
+                copy = (ObjectWithDynamicAttributes)GetType().GetConstructor(System.Type.EmptyTypes).Invoke(null);
                 foreach (object val in attributes)
                 {
                     copy.attributes.Add(val, attributes[val]);
@@ -134,7 +134,7 @@ namespace aima.core.agent.impl
 
         public override bool Equals(Object o)
         {
-            if (o == null || this.GetType() != o.GetType())
+            if (o == null || GetType() != o.GetType())
             {
                 return base.Equals(o);
             }

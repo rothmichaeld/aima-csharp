@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace aima.core.util
 {
@@ -8,25 +7,25 @@ namespace aima.core.util
      * @author Mike Stampone
      * 
      */
-     public class Triplet<X, Y, Z>
+    public class Triplet<X, Y, Z>
     {
-        private X x;
+        private readonly X x;
 
-	private Y y;
+        private readonly Y y;
 
-        private Z z;
+        private readonly Z z;
 
-	/**
-	 * Constructs a triplet with three specified elements.
-	 * 
-	 * @param x
-	 *            the first element of the triplet.
-	 * @param y
-	 *            the second element of the triplet.
-	 * @param z
-	 *            the third element of the triplet.
-	 */
-	public Triplet(X x, Y y, Z z)
+        /**
+         * Constructs a triplet with three specified elements.
+         * 
+         * @param x
+         *            the first element of the triplet.
+         * @param y
+         *            the second element of the triplet.
+         * @param z
+         *            the third element of the triplet.
+         */
+        public Triplet(X x, Y y, Z z)
         {
             this.x = x;
             this.y = y;

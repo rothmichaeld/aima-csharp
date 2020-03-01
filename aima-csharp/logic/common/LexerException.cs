@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace aima.core.logic.common
 {
@@ -13,30 +12,30 @@ namespace aima.core.logic.common
      */
     public class LexerException : SystemException
     {
-	private static readonly long serialVersionUID = 1L;
+        private static readonly long serialVersionUID = 1L;
 
-	private int currentPositionInInput;
+        private readonly int currentPositionInInput;
 
-	public LexerException(String message, int currentPositionInInput): base(message)
-	{	    
-	    this.currentPositionInInput = currentPositionInInput;
-	}
+        public LexerException(String message, int currentPositionInInput) : base(message)
+        {
+            this.currentPositionInInput = currentPositionInInput;
+        }
 
-	public LexerException(String message, int currentPositionInInput,
-			Exception cause): base(message, cause)
-	{
-	    
-	    this.currentPositionInInput = currentPositionInInput;
-	}
+        public LexerException(String message, int currentPositionInInput,
+                Exception cause) : base(message, cause)
+        {
 
-	/**
-	 * 
-	 * @return the current position in the input character stream that the lexer
-	 *         was at before the exception was encountered.
-	 */
-	public int getCurrentPositionInInputExceptionThrown()
-	{
-	    return currentPositionInInput;
-	}
+            this.currentPositionInInput = currentPositionInInput;
+        }
+
+        /**
+         * 
+         * @return the current position in the input character stream that the lexer
+         *         was at before the exception was encountered.
+         */
+        public int getCurrentPositionInInputExceptionThrown()
+        {
+            return currentPositionInInput;
+        }
     }
 }

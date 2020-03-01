@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace aima.core.logic.fol.inference.trace
 {
     /**
@@ -9,8 +6,8 @@ namespace aima.core.logic.fol.inference.trace
      */
     public interface FOLModelEliminationTracer
     {
-	void reset();
+        void reset();
 
-	void increment(int depth, int noFarParents);
+        void increment(int depth, int noFarParents);
     }
 }

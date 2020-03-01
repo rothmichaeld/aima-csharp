@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using aima.core.agent;
 using System.Diagnostics;
 
 namespace aima.core.agent.impl
@@ -65,7 +63,7 @@ namespace aima.core.agent.impl
         {
             Debug.Assert(keys.Length == values.Length);
 
-            for(int i = 0; i < keys.Length; i++)
+            for (int i = 0; i < keys.Length; i++)
             {
                 setAttribute(keys[i], values[i]);
             }

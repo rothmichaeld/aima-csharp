@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using aima.core.agent;
 using aima.core.agent.impl;
-using aima.core.util;
 using aima.core.search.framework.problem;
+using aima.core.util;
+using System.Collections.Generic;
 
 namespace aima.core.search.framework
 {
@@ -36,16 +36,16 @@ namespace aima.core.search.framework
      * @author Ciaran O'Reilly
      * @author Mike Stampone
      */
-     public abstract class SimpleProblemSolvingAgent : AbstractAgent
+    public abstract class SimpleProblemSolvingAgent : AbstractAgent
     {
 
         // seq, an action sequence, initially empty
         private List<Action> seq = new List<Action>();
 
         //
-        private bool formulateGoalsIndefinitely = true;
+        private readonly bool formulateGoalsIndefinitely = true;
 
-        private int maxGoalsToFormulate = 1;
+        private readonly int maxGoalsToFormulate = 1;
 
         private int goalsFormulated = 0;
 
@@ -53,7 +53,7 @@ namespace aima.core.search.framework
 	 * Constructs a simple problem solving agent which will formulate goals
     	 * indefinitely.
     	 */
-         public SimpleProblemSolvingAgent()
+        public SimpleProblemSolvingAgent()
         {
             formulateGoalsIndefinitely = true;
         }
@@ -65,7 +65,7 @@ namespace aima.core.search.framework
     	 * @param maxGoalsToFormulate
     	 *            the maximum number of goals this agent is to formulate.
 	 */
-         public SimpleProblemSolvingAgent(int maxGoalsToFormulate)
+        public SimpleProblemSolvingAgent(int maxGoalsToFormulate)
         {
             formulateGoalsIndefinitely = false;
             this.maxGoalsToFormulate = maxGoalsToFormulate;
@@ -122,7 +122,7 @@ namespace aima.core.search.framework
         }
 
         // PROTECTED METHODS
-        
+
         protected abstract State updateState(Percept p);
 
         protected abstract System.Object formulateGoal();

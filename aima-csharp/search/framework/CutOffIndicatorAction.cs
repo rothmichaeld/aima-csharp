@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using aima.core.agent.impl;
 
 namespace aima.core.search.framework
@@ -21,7 +19,7 @@ namespace aima.core.search.framework
         }
 
         // END-Action
-        private CutOffIndicatorAction(): base("CutOff")
+        private CutOffIndicatorAction() : base("CutOff")
         {
 
         }

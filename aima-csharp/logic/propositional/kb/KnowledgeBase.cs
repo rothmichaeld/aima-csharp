@@ -1,5 +1,5 @@
-﻿using System;
-using aima.core.logic.propositional.parsing.ast;
+﻿using aima.core.logic.propositional.parsing.ast;
+using System;
 
 namespace aima.core.logic.propositional.kb
 {

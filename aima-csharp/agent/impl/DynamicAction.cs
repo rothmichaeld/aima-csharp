@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using aima.core.agent;
 
 namespace aima.core.agent.impl
 {
@@ -14,7 +12,7 @@ namespace aima.core.agent.impl
 
         public DynamicAction(String name)
         {
-            this.setAttribute(ATTRIBUTE_NAME, name);
+            setAttribute(ATTRIBUTE_NAME, name);
         }
 
         /**
@@ -36,7 +34,7 @@ namespace aima.core.agent.impl
         // END-Action
         public String describeType()
         {
-            return this.GetType().Name;
+            return GetType().Name;
         }
     }
 }

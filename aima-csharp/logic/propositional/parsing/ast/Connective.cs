@@ -1,5 +1,5 @@
-﻿using System;
-using aima.core.util;
+﻿using aima.core.util;
+using System;
 using System.Collections.Generic;
 
 namespace aima.core.logic.propositional.parsing.ast
@@ -63,7 +63,7 @@ namespace aima.core.logic.propositional.parsing.ast
         {
             return precedence;
         }
-        
+
         public String toString()
         {
             return getSymbol();
@@ -169,7 +169,7 @@ namespace aima.core.logic.propositional.parsing.ast
         // PRIVATE
         //
         private static readonly HashSet<char> _connectiveLeadingChars = Util.createSet('~', '&', '|', '=', '<');
-        private static readonly HashSet<char> _connectiveChars        = Util.createSet('~', '&', '|', '=', '<', '>');
+        private static readonly HashSet<char> _connectiveChars = Util.createSet('~', '&', '|', '=', '<', '>');
 
         private readonly int precedence;
         private readonly String symbol;

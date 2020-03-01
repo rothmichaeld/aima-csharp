@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace aima.core.search.local
 {
@@ -7,10 +6,10 @@ namespace aima.core.search.local
      * @author Ravi Mohan
      * 
      */
-     public class Scheduler
+    public class Scheduler
     {
-        private int k, limit;
-        private double lam;
+        private readonly int k, limit;
+        private readonly double lam;
 
         public Scheduler(int k, double lam, int limit)
         {
@@ -21,9 +20,9 @@ namespace aima.core.search.local
 
         public Scheduler()
         {
-            this.k = 20;
-            this.lam = 0.045;
-            this.limit = 100;
+            k = 20;
+            lam = 0.045;
+            limit = 100;
         }
 
         public double getTemp(int t)

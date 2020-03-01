@@ -16,11 +16,11 @@ namespace aima.core.search.local
      *            individuals in the population (this is to provide flexibility in
      *            terms of how a problem can be encoded).
      */
-     public class Individual<A>
+    public class Individual<A>
     {
-        private List<A> representation = new List<A>();
+        private readonly List<A> representation = new List<A>();
         private int descendants; // for debugging
-        
+
         /**
 	 * Construct an individual using the provided representation.
 	 * 
@@ -66,8 +66,8 @@ namespace aima.core.search.local
         }
 
         public String toString()
-        {            
-            return representation.ToString() + descendants;            
+        {
+            return representation.ToString() + descendants;
         }
     }
 }

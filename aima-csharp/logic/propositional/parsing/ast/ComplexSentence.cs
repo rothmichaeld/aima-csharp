@@ -1,5 +1,4 @@
-﻿using aima.core.logic.propositional.parsing.ast;
-using System;
+﻿using System;
 
 namespace aima.core.logic.propositional.parsing.ast
 {
@@ -16,12 +15,12 @@ namespace aima.core.logic.propositional.parsing.ast
     {
 
 
-        private Connective connective;
-        private Sentence[] simplerSentences;
+        private readonly Connective connective;
+        private readonly Sentence[] simplerSentences;
         // Lazy initialize these values.
         private int cachedHashCode = -1;
         private String cachedConcreteSyntax = null;
-    
+
         /**
 	    * Constructor.
 	    * 
@@ -34,7 +33,7 @@ namespace aima.core.logic.propositional.parsing.ast
         {
             // Assertion checks
             assertLegalArguments(connective, sentences);
-    
+
             this.connective = connective;
             simplerSentences = new Sentence[sentences.Length];
             for (int i = 0; i < sentences.Length; i++)
@@ -42,7 +41,7 @@ namespace aima.core.logic.propositional.parsing.ast
                 simplerSentences[i] = sentences[i];
             }
         }
-    
+
         /**
 	    * Convenience constructor for binary sentences.
 	    * 
@@ -55,50 +54,50 @@ namespace aima.core.logic.propositional.parsing.ast
 	    */
         public ComplexSentence(Sentence sentenceL, Connective binaryConnective, Sentence sentenceR) : this(binaryConnective, sentenceL, sentenceR)
         {
-            
+
         }
-    
+
         public override Connective getConnective()
         {
             return connective;
         }
-    
+
         public override int getNumberSimplerSentences()
         {
             return simplerSentences.Length;
         }
-    
+
         public override Sentence getSimplerSentence(int offset)
         {
             return simplerSentences[offset];
         }
-    
+
         public override bool Equals(Object o)
         {
             if (this == o)
             {
                 return true;
             }
-            if ((o == null) || (this.GetType() != o.GetType()))
+            if ((o == null) || (GetType() != o.GetType()))
             {
                 return false;
             }
-    
+
             bool result = false;
             ComplexSentence other = (ComplexSentence)o;
-            if (other.GetHashCode() == this.GetHashCode())
+            if (other.GetHashCode() == GetHashCode())
             {
-                if (other.getConnective().Equals(this.getConnective())
-                        && other.getNumberSimplerSentences() == this
-                                .getNumberSimplerSentences())
+                if (other.getConnective().Equals(getConnective())
+                        && other.getNumberSimplerSentences() ==
+                                getNumberSimplerSentences())
                 {
                     // connective and # of simpler sentences match
                     // assume match and then test each simpler sentence
                     result = true;
-                    for (int i = 0; i < this.getNumberSimplerSentences(); i++)
+                    for (int i = 0; i < getNumberSimplerSentences(); i++)
                     {
                         if (!other.getSimplerSentence(i).Equals(
-                                this.getSimplerSentence(i)))
+                                getSimplerSentence(i)))
                         {
                             result = false;
                             break;
@@ -106,24 +105,24 @@ namespace aima.core.logic.propositional.parsing.ast
                     }
                 }
             }
-    
+
             return result;
         }
-    
+
         public override int GetHashCode()
         {
             if (cachedHashCode == -1)
             {
                 cachedHashCode = 17 * getConnective().GetHashCode();
-                foreach(Sentence s in simplerSentences)
+                foreach (Sentence s in simplerSentences)
                 {
                     cachedHashCode = (cachedHashCode * 37) + s.GetHashCode();
                 }
             }
-    
+
             return cachedHashCode;
         }
-    
+
         public override String ToString()
         {
             if (cachedConcreteSyntax == null)
@@ -144,7 +143,7 @@ namespace aima.core.logic.propositional.parsing.ast
             }
             return cachedConcreteSyntax;
         }
-    
+
         //
         // PRIVATE
         //
@@ -175,4 +174,3 @@ namespace aima.core.logic.propositional.parsing.ast
         }
     }
 }
-        

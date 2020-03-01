@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using aima.core.agent;
 using aima.core.util;
 
@@ -17,152 +16,152 @@ namespace aima.core.environment.cellworld
      * @author Ciaran O'Reilly
      * 
      */
-     public class CellWorldAction : Action
+    public class CellWorldAction : Action
     {
-	public CellWorldAction()
-	{
+        public CellWorldAction()
+        {
 
-	}
+        }
 
-	public CellWorldAction(ActionEnum action)
-	{
-	    this._action = action;
-	}
-
-
-	public enum ActionEnum
-	{
-	    Up, Down, Left, Right, None
-	};
-
-	private ActionEnum _action;
-
-	private static readonly LinkedHashSet<ActionEnum> _actions = new LinkedHashSet<ActionEnum>();
+        public CellWorldAction(ActionEnum action)
+        {
+            _action = action;
+        }
 
 
-	static CellWorldAction()
-	{
-	    _actions.Add(ActionEnum.Up);
-	    _actions.Add(ActionEnum.Down);
-	    _actions.Add(ActionEnum.Left);
-	    _actions.Add(ActionEnum.Right);
-	    _actions.Add(ActionEnum.None);
-	}
+        public enum ActionEnum
+        {
+            Up, Down, Left, Right, None
+        };
 
-	/**
-	 * 
-	 * @return a set of the actual actions.
-	 */
-	public static LinkedHashSet<ActionEnum> actions()
-	{
-	    return _actions;
-	}
+        private readonly ActionEnum _action;
 
-	// START-Action
+        private static readonly LinkedHashSet<ActionEnum> _actions = new LinkedHashSet<ActionEnum>();
 
-	public bool isNoOp()
-	{
-	    if (this._action == ActionEnum.None)
-	    {
-		return true;
-	    }
-	    return false;
-	}
 
-	// END-Action
-	
-	/**
-	 * 
-	 * @param curX
-	 *            the current x position.
-	 * @return the result on the x position of applying this action.
-	 */
-	public int getXResult(int curX)
-	{
-	    int newX = curX;
+        static CellWorldAction()
+        {
+            _actions.Add(ActionEnum.Up);
+            _actions.Add(ActionEnum.Down);
+            _actions.Add(ActionEnum.Left);
+            _actions.Add(ActionEnum.Right);
+            _actions.Add(ActionEnum.None);
+        }
 
-	    switch (this._action)
-	    {
-		case ActionEnum.Left:
-		    newX--;
-		    break;
-		case ActionEnum.Right:
-		    newX++;
-		    break;
-	    }
-	    return newX;
-	}
+        /**
+         * 
+         * @return a set of the actual actions.
+         */
+        public static LinkedHashSet<ActionEnum> actions()
+        {
+            return _actions;
+        }
 
-	/**
-	 * 
-	 * @param curY
-	 *            the current y position.
-	 * @return the result on the y position of applying this action.
-	 */
-	public int getYResult(int curY)
-	{
-	    int newY = curY;
+        // START-Action
 
-	    switch (this._action)
-	    {
-		case ActionEnum.Up:
-		    newY++;
-		    break;
-		case ActionEnum.Down:
-		    newY--;
-		    break;
-	    }
-	    return newY;
-	}
+        public bool isNoOp()
+        {
+            if (_action == ActionEnum.None)
+            {
+                return true;
+            }
+            return false;
+        }
 
-	/**
-	 * 
-	 * @return the first right angled action related to this action.
-	 */
-	public ActionEnum getFirstRightAngledAction()
-	{
-	    ActionEnum a = ActionEnum.None;
+        // END-Action
 
-	    switch (this._action)
-	    {
-		case ActionEnum.Up:
-		case ActionEnum.Down:
-		    a = ActionEnum.Left;
-		    break;
-		case ActionEnum.Left:
-		case ActionEnum.Right:
-		    a = ActionEnum.Down;
-		    break;
-		case ActionEnum.None:
-		    a = ActionEnum.None;
-		    break;
-	    }
-	    return a;
-	}
+        /**
+         * 
+         * @param curX
+         *            the current x position.
+         * @return the result on the x position of applying this action.
+         */
+        public int getXResult(int curX)
+        {
+            int newX = curX;
 
-	/**
-	 * 
-	 * @return the second right angled action related to this action.
-	 */
-	public ActionEnum getSecondRightAngledAction()
-	{
-	    ActionEnum a = ActionEnum.None;
+            switch (_action)
+            {
+                case ActionEnum.Left:
+                    newX--;
+                    break;
+                case ActionEnum.Right:
+                    newX++;
+                    break;
+            }
+            return newX;
+        }
 
-	    switch (this._action)
-	    {
-		case ActionEnum.Up:
-		case ActionEnum.Down:
-		    a = ActionEnum.Right;
-		    break;
-		case ActionEnum.Left:
-		case ActionEnum.Right:
-		    a = ActionEnum.Up;
-		    break;
-		case ActionEnum.None:
-		    a = ActionEnum.None;
-		    break;
-	    }
-	    return a;
-	}
+        /**
+         * 
+         * @param curY
+         *            the current y position.
+         * @return the result on the y position of applying this action.
+         */
+        public int getYResult(int curY)
+        {
+            int newY = curY;
+
+            switch (_action)
+            {
+                case ActionEnum.Up:
+                    newY++;
+                    break;
+                case ActionEnum.Down:
+                    newY--;
+                    break;
+            }
+            return newY;
+        }
+
+        /**
+         * 
+         * @return the first right angled action related to this action.
+         */
+        public ActionEnum getFirstRightAngledAction()
+        {
+            ActionEnum a = ActionEnum.None;
+
+            switch (_action)
+            {
+                case ActionEnum.Up:
+                case ActionEnum.Down:
+                    a = ActionEnum.Left;
+                    break;
+                case ActionEnum.Left:
+                case ActionEnum.Right:
+                    a = ActionEnum.Down;
+                    break;
+                case ActionEnum.None:
+                    a = ActionEnum.None;
+                    break;
+            }
+            return a;
+        }
+
+        /**
+         * 
+         * @return the second right angled action related to this action.
+         */
+        public ActionEnum getSecondRightAngledAction()
+        {
+            ActionEnum a = ActionEnum.None;
+
+            switch (_action)
+            {
+                case ActionEnum.Up:
+                case ActionEnum.Down:
+                    a = ActionEnum.Right;
+                    break;
+                case ActionEnum.Left:
+                case ActionEnum.Right:
+                    a = ActionEnum.Up;
+                    break;
+                case ActionEnum.None:
+                    a = ActionEnum.None;
+                    break;
+            }
+            return a;
+        }
     }
 }

@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using aima.core.agent;
 using aima.core.agent.impl;
 using aima.core.search.framework.problem;
+using System.Collections.Generic;
 
 namespace aima.core.search.framework
 {
@@ -9,13 +9,13 @@ namespace aima.core.search.framework
      * @author Ravi Mohan
      * 
      */
-     public class SearchAgent : AbstractAgent
+    public class SearchAgent : AbstractAgent
     {
         protected List<Action> actionList;
 
         private List<Action>.Enumerator actionIterator;
 
-        private Metrics searchMetrics;
+        private readonly Metrics searchMetrics;
 
         public SearchAgent(Problem p, Search search)
         {

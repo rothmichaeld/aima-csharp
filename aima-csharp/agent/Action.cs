@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace aima.core.agent
 {
     /**
@@ -8,15 +5,15 @@ namespace aima.core.agent
      *
      * @author Ciaran O'Reilly
      */
-     public interface Action
-     {
-         /**
-	  * Indicates whether or not this Action is a 'No Operation'.<br>
-	  * Note: AIMA3e - NoOp, or no operation, is the name of an assembly language
-	  * instruction that does nothing.
-	  * 
-	  * @return true if this is a NoOp Action.
-	  */
-         bool isNoOp();
-     }
+    public interface Action
+    {
+        /**
+     * Indicates whether or not this Action is a 'No Operation'.<br>
+     * Note: AIMA3e - NoOp, or no operation, is the name of an assembly language
+     * instruction that does nothing.
+     * 
+     * @return true if this is a NoOp Action.
+     */
+        bool isNoOp();
+    }
 }

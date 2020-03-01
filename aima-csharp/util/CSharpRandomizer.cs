@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System;
 
 namespace aima.core.util
@@ -12,25 +11,25 @@ namespace aima.core.util
      */
     public class CSharpRandomizer : Randomizer
     {
-	private static Random _r = new Random();
-	private Random r = null;
+        private static readonly Random _r = new Random();
+        private readonly Random r = null;
 
-	public CSharpRandomizer(): this(_r)
-	{
+        public CSharpRandomizer() : this(_r)
+        {
 
-	}
+        }
 
-	public CSharpRandomizer(Random r)
-	{
-	    this.r = r;
-	}
+        public CSharpRandomizer(Random r)
+        {
+            this.r = r;
+        }
 
-	// START-Randomizer
-	public double nextDouble()
-	{
-	    return r.NextDouble();
-	}
+        // START-Randomizer
+        public double nextDouble()
+        {
+            return r.NextDouble();
+        }
 
-	// END-Randomizer
+        // END-Randomizer
     }
 }

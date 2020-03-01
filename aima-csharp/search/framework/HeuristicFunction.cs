@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace aima.core.search.framework
 {
@@ -16,7 +15,7 @@ namespace aima.core.search.framework
      * @author Ravi Mohan
      * 
      */
-     public interface HeuristicFunction
+    public interface HeuristicFunction
     {
         double h(Object state);
     }

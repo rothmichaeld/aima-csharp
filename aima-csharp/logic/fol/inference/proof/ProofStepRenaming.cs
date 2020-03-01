@@ -11,32 +11,32 @@ namespace aima.core.logic.fol.inference.proof
      */
     public class ProofStepRenaming : AbstractProofStep
     {
-	private List<ProofStep> predecessors = new List<ProofStep>();
-	private Object proof = "";
+        private readonly List<ProofStep> predecessors = new List<ProofStep>();
+        private readonly Object proof = "";
 
-	public ProofStepRenaming(Object proof, ProofStep predecessor)
-	{
-	    this.proof = proof;
-	    this.predecessors.Add(predecessor);
-	}
+        public ProofStepRenaming(Object proof, ProofStep predecessor)
+        {
+            this.proof = proof;
+            predecessors.Add(predecessor);
+        }
 
-	// START-ProofStep
+        // START-ProofStep
 
-	public override List<ProofStep> getPredecessorSteps()
-	{
-	    return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
-	}
+        public override List<ProofStep> getPredecessorSteps()
+        {
+            return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
+        }
 
-	public override String getProof()
-	{
-	    return proof.ToString();
-	}
+        public override String getProof()
+        {
+            return proof.ToString();
+        }
 
-	public override String getJustification()
-	{
-	    return "Renaming of " + predecessors[0].getStepNumber();
-	}
+        public override String getJustification()
+        {
+            return "Renaming of " + predecessors[0].getStepNumber();
+        }
 
-	// END-ProofStep
+        // END-ProofStep
     }
 }

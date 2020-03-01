@@ -11,32 +11,32 @@ namespace aima.core.logic.fol.inference.proof
      */
     public class ProofStepGoal : AbstractProofStep
     {
-	private static readonly List<ProofStep> _noPredecessors = new List<ProofStep>();
+        private static readonly List<ProofStep> _noPredecessors = new List<ProofStep>();
 
-	private Object proof = "";
+        private readonly Object proof = "";
 
-	public ProofStepGoal(Object proof)
-	{
-	    this.proof = proof;
-	}
+        public ProofStepGoal(Object proof)
+        {
+            this.proof = proof;
+        }
 
-	// START-ProofStep
+        // START-ProofStep
 
-	public override List<ProofStep> getPredecessorSteps()
-	{
-	    return new ReadOnlyCollection<ProofStep>(_noPredecessors).ToList<ProofStep>();
-	}
-	
-	public override String getProof()
-	{
-	    return proof.ToString();
-	}
-	
-	public override String getJustification()
-	{
-	    return "Goal";
-	}
+        public override List<ProofStep> getPredecessorSteps()
+        {
+            return new ReadOnlyCollection<ProofStep>(_noPredecessors).ToList<ProofStep>();
+        }
 
-	// END-ProofStep
+        public override String getProof()
+        {
+            return proof.ToString();
+        }
+
+        public override String getJustification()
+        {
+            return "Goal";
+        }
+
+        // END-ProofStep
     }
 }

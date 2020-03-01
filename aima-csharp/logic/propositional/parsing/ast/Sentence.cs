@@ -1,9 +1,8 @@
-﻿using System;
+﻿using aima.core.logic.common;
+using aima.core.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using aima.core.logic.common;
-using aima.core.logic.propositional.parsing;
-using aima.core.util;
 
 namespace aima.core.logic.propositional.parsing.ast
 {
@@ -184,7 +183,8 @@ namespace aima.core.logic.propositional.parsing.ast
                 Sentence childSentence)
         {
             String result = null;
-            if (childSentence is ComplexSentence) {
+            if (childSentence is ComplexSentence)
+            {
                 ComplexSentence cs = (ComplexSentence)childSentence;
                 if (cs.getConnective().getPrecedence() < parentConnective
                         .getPrecedence())
@@ -260,7 +260,7 @@ namespace aima.core.logic.propositional.parsing.ast
             }
             return new ComplexSentence(Util.first(conjuncts), Connective.AND, newConjunction(Util.rest(conjuncts)));
         }
-        
+
         // PROTECTED
 
         protected bool hasConnective(Connective connective)

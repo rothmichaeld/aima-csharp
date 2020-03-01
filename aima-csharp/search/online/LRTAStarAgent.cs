@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using aima.core.agent;
 using aima.core.agent.impl;
 using aima.core.search.framework;
 using aima.core.util;
+using System.Collections.Generic;
 
 namespace aima.core.search.online
 {
@@ -46,201 +46,201 @@ namespace aima.core.search.online
      */
     public class LRTAStarAgent : AbstractAgent
     {
-	private OnlineSearchProblem problem;
-	private PerceptToStateFunction ptsFunction;
-	private HeuristicFunction hf;
-	// persistent: result, a table, indexed by state and action, initially empty
-	private readonly TwoKeyHashMap<object, Action, object> result = new TwoKeyHashMap<object, Action, object>();
-	// H, a table of cost estimates indexed by state, initially empty
-	private readonly Dictionary<object, double> H = new Dictionary<object, double>();
-	// s, a, the previous state and action, initially null
-	private object s = null;
-	private Action a = null;
+        private OnlineSearchProblem problem;
+        private PerceptToStateFunction ptsFunction;
+        private HeuristicFunction hf;
+        // persistent: result, a table, indexed by state and action, initially empty
+        private readonly TwoKeyHashMap<object, Action, object> result = new TwoKeyHashMap<object, Action, object>();
+        // H, a table of cost estimates indexed by state, initially empty
+        private readonly Dictionary<object, double> H = new Dictionary<object, double>();
+        // s, a, the previous state and action, initially null
+        private object s = null;
+        private Action a = null;
 
-	/**
-	 * Constructs a LRTA* agent with the specified search problem, percept to
-	 * state function, and heuristic function.
-	 * 
-	 * @param problem
-	 *            an online search problem for this agent to solve.
-	 * @param ptsFunction
-	 *            a function which returns the problem state associated with a
-	 *            given Percept.
-	 * @param hf
-	 *            heuristic function <em>h(n)</em>, which estimates the cost of
-	 *            the cheapest path from the state at node <em>n</em> to a goal
-	 *            state.
-	 */
-	public LRTAStarAgent(OnlineSearchProblem problem,
-			PerceptToStateFunction ptsFunction, HeuristicFunction hf)
-	{
-	    setProblem(problem);
-	    setPerceptToStateFunction(ptsFunction);
-	    setHeuristicFunction(hf);
-	}
+        /**
+         * Constructs a LRTA* agent with the specified search problem, percept to
+         * state function, and heuristic function.
+         * 
+         * @param problem
+         *            an online search problem for this agent to solve.
+         * @param ptsFunction
+         *            a function which returns the problem state associated with a
+         *            given Percept.
+         * @param hf
+         *            heuristic function <em>h(n)</em>, which estimates the cost of
+         *            the cheapest path from the state at node <em>n</em> to a goal
+         *            state.
+         */
+        public LRTAStarAgent(OnlineSearchProblem problem,
+                PerceptToStateFunction ptsFunction, HeuristicFunction hf)
+        {
+            setProblem(problem);
+            setPerceptToStateFunction(ptsFunction);
+            setHeuristicFunction(hf);
+        }
 
-	/**
-	 * Returns the search problem of this agent.
-	 * 
-	 * @return the search problem of this agent.
-	 */
-	public OnlineSearchProblem getProblem()
-	{
-	    return problem;
-	}
+        /**
+         * Returns the search problem of this agent.
+         * 
+         * @return the search problem of this agent.
+         */
+        public OnlineSearchProblem getProblem()
+        {
+            return problem;
+        }
 
-	/**
-	 * Sets the search problem for this agent to solve.
-	 * 
-	 * @param problem
-	 *            the search problem for this agent to solve.
-	 */
-	public void setProblem(OnlineSearchProblem problem)
-	{
-	    this.problem = problem;
-	    init();
-	}
+        /**
+         * Sets the search problem for this agent to solve.
+         * 
+         * @param problem
+         *            the search problem for this agent to solve.
+         */
+        public void setProblem(OnlineSearchProblem problem)
+        {
+            this.problem = problem;
+            init();
+        }
 
-	/**
-	 * Returns the percept to state function of this agent.
-	 * 
-	 * @return the percept to state function of this agent.
-	 */
-	public PerceptToStateFunction getPerceptToStateFunction()
-	{
-	    return ptsFunction;
-	}
+        /**
+         * Returns the percept to state function of this agent.
+         * 
+         * @return the percept to state function of this agent.
+         */
+        public PerceptToStateFunction getPerceptToStateFunction()
+        {
+            return ptsFunction;
+        }
 
-	/**
-	 * Sets the percept to state function of this agent.
-	 * 
-	 * @param ptsFunction
-	 *            a function which returns the problem state associated with a
-	 *            given Percept.
-	 */
-	public void setPerceptToStateFunction(PerceptToStateFunction ptsFunction)
-	{
-	    this.ptsFunction = ptsFunction;
-	}
+        /**
+         * Sets the percept to state function of this agent.
+         * 
+         * @param ptsFunction
+         *            a function which returns the problem state associated with a
+         *            given Percept.
+         */
+        public void setPerceptToStateFunction(PerceptToStateFunction ptsFunction)
+        {
+            this.ptsFunction = ptsFunction;
+        }
 
-	/**
-	 * Returns the heuristic function of this agent.
-	 */
-	public HeuristicFunction getHeuristicFunction()
-	{
-	    return hf;
-	}
+        /**
+         * Returns the heuristic function of this agent.
+         */
+        public HeuristicFunction getHeuristicFunction()
+        {
+            return hf;
+        }
 
-	/**
-	 * Sets the heuristic function of this agent.
-	 * 
-	 * @param hf
-	 *            heuristic function <em>h(n)</em>, which estimates the cost of
-	 *            the cheapest path from the state at node <em>n</em> to a goal
-	 *            state.
-	 */
-	public void setHeuristicFunction(HeuristicFunction hf)
-	{
-	    this.hf = hf;
-	}
+        /**
+         * Sets the heuristic function of this agent.
+         * 
+         * @param hf
+         *            heuristic function <em>h(n)</em>, which estimates the cost of
+         *            the cheapest path from the state at node <em>n</em> to a goal
+         *            state.
+         */
+        public void setHeuristicFunction(HeuristicFunction hf)
+        {
+            this.hf = hf;
+        }
 
-	// function LRTA*-AGENT(s') returns an action
-	// inputs: s', a percept that identifies the current state
-	public override Action execute(Percept psDelta)
-	{
-	    object sDelta = ptsFunction.getState(psDelta);
-	    // if GOAL-TEST(s') then return stop
-	    if(goalTest(sDelta))
-	    {
-		a = NoOpAction.NO_OP;
-	    }
-	    else
-	    {
-		// if s' is a new state (not in H) then H[s'] <- h(s')
-		if(!H.ContainsKey(sDelta))
-		{
-		    H.Add(sDelta, getHeuristicFunction().h(sDelta));
-		}
-		// if s is not null
-		if(null != s)
-		{
-		    // result[s, a] <- s'
-		    result.put(s, a, sDelta);
+        // function LRTA*-AGENT(s') returns an action
+        // inputs: s', a percept that identifies the current state
+        public override Action execute(Percept psDelta)
+        {
+            object sDelta = ptsFunction.getState(psDelta);
+            // if GOAL-TEST(s') then return stop
+            if (goalTest(sDelta))
+            {
+                a = NoOpAction.NO_OP;
+            }
+            else
+            {
+                // if s' is a new state (not in H) then H[s'] <- h(s')
+                if (!H.ContainsKey(sDelta))
+                {
+                    H.Add(sDelta, getHeuristicFunction().h(sDelta));
+                }
+                // if s is not null
+                if (null != s)
+                {
+                    // result[s, a] <- s'
+                    result.put(s, a, sDelta);
 
-		    // H[s] <- min LRTA*-COST(s, b, result[s, b], H)
-		    // b (element of) ACTIONS(s)
-		    double minimum = double.MaxValue;
-		    foreach(Action b in actions(s))
-		    {
-			double cost = lrtaCost(s, b, result.get(s, b));
-			if(cost < minimum)
-			{
-			    minimum = cost;
-			}
-		    }
-		    H.Add(s, minimum);
-		}
-		// a <- an action b in ACTIONS(s') that minimizes LRTA*-COST(s', b,
-		// result[s', b], H)
-		double min = double.MaxValue;
-		// Just in case no actions
-		a = NoOpAction.NO_OP;
-		foreach(agent.Action b in actions(sDelta))
-		{
-		    double cost = lrtaCost(sDelta, b, result.get(sDelta, b));
-		    if(cost < min)
-		    {
-			min = cost;
-			a = b;
-		    }
-		}
-	    }
+                    // H[s] <- min LRTA*-COST(s, b, result[s, b], H)
+                    // b (element of) ACTIONS(s)
+                    double minimum = double.MaxValue;
+                    foreach (Action b in actions(s))
+                    {
+                        double cost = lrtaCost(s, b, result.get(s, b));
+                        if (cost < minimum)
+                        {
+                            minimum = cost;
+                        }
+                    }
+                    H.Add(s, minimum);
+                }
+                // a <- an action b in ACTIONS(s') that minimizes LRTA*-COST(s', b,
+                // result[s', b], H)
+                double min = double.MaxValue;
+                // Just in case no actions
+                a = NoOpAction.NO_OP;
+                foreach (agent.Action b in actions(sDelta))
+                {
+                    double cost = lrtaCost(sDelta, b, result.get(sDelta, b));
+                    if (cost < min)
+                    {
+                        min = cost;
+                        a = b;
+                    }
+                }
+            }
 
-	    // s <- s'
-	    s = sDelta;
+            // s <- s'
+            s = sDelta;
 
-	    if (a.isNoOp())
-	    {
-		// I'm either at the Goal or can't get to it,
-		// which in either case I'm finished so just die.
-		setAlive(false);
-	    }
-	    // return a
-	    return a;
-	}
+            if (a.isNoOp())
+            {
+                // I'm either at the Goal or can't get to it,
+                // which in either case I'm finished so just die.
+                setAlive(false);
+            }
+            // return a
+            return a;
+        }
 
-	// PRIVATE METHODS
-	
-	private void init()
-	{
-	    setAlive(true);
-	    result.Clear();
-	    H.Clear();
-	    s = null;
-	    a = null;
-	}
+        // PRIVATE METHODS
 
-	private bool goalTest(object state)
-	{
-	    return getProblem().isGoalState(state);
-	}
+        private void init()
+        {
+            setAlive(true);
+            result.Clear();
+            H.Clear();
+            s = null;
+            a = null;
+        }
 
-	// function LRTA*-COST(s, a, s', H) returns a cost estimate
-	private double lrtaCost(object s, Action action, object sDelta)
-	{
-	    // if s' is undefined then return h(s)
-	    if (null == sDelta)
-	    {
-		return getHeuristicFunction().h(s);
-	    }
-	    // else return c(s, a, s') + H[s']
-	    return getProblem().getStepCostFunction().c(s, action, sDelta)
-			    + H[sDelta];
-	}
+        private bool goalTest(object state)
+        {
+            return getProblem().isGoalState(state);
+        }
 
-	private HashSet<Action> actions(object state)
-	{
-	    return problem.getActionsFunction().actions(state);
-	}
+        // function LRTA*-COST(s, a, s', H) returns a cost estimate
+        private double lrtaCost(object s, Action action, object sDelta)
+        {
+            // if s' is undefined then return h(s)
+            if (null == sDelta)
+            {
+                return getHeuristicFunction().h(s);
+            }
+            // else return c(s, a, s') + H[s']
+            return getProblem().getStepCostFunction().c(s, action, sDelta)
+                    + H[sDelta];
+        }
+
+        private HashSet<Action> actions(object state)
+        {
+            return problem.getActionsFunction().actions(state);
+        }
     }
 }

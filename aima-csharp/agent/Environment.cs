@@ -19,7 +19,7 @@ namespace aima.core.agent
 	 * @return The Agents belonging to this Environment.
 	 */
         List<Agent> getAgents();
-        
+
         /**
          * Add an agent to the Environment.
          * 
@@ -27,7 +27,7 @@ namespace aima.core.agent
          *            the agent to be added.
          */
         void addAgent(Agent agent);
-         
+
         /**
          * Remove an agent from the environment.
          * 
@@ -35,7 +35,7 @@ namespace aima.core.agent
          *            the agent to be removed.
          */
         void removeAgent(Agent agent);
-         
+
         /**
 	 * Returns the EnvironmentObjects that exist in this Environment.
 	 * 

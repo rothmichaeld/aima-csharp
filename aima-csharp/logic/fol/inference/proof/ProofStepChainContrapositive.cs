@@ -1,8 +1,8 @@
+using aima.core.logic.fol.kb.data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Collections.ObjectModel;
-using aima.core.logic.fol.kb.data;
+using System.Linq;
 
 namespace aima.core.logic.fol.inference.proof
 {
@@ -12,36 +12,36 @@ namespace aima.core.logic.fol.inference.proof
      */
     public class ProofStepChainContrapositive : AbstractProofStep
     {
-	private List<ProofStep> predecessors = new List<ProofStep>();
-	private Chain contrapositive = null;
-	private Chain contrapositiveOf = null;
+        private readonly List<ProofStep> predecessors = new List<ProofStep>();
+        private readonly Chain contrapositive = null;
+        private readonly Chain contrapositiveOf = null;
 
-	public ProofStepChainContrapositive(Chain contrapositive,
-		Chain contrapositiveOf)
-	{
-	    this.contrapositive = contrapositive;
-	    this.contrapositiveOf = contrapositiveOf;
-	    this.predecessors.Add(contrapositiveOf.getProofStep());
-	}
-	
-	// START-ProofStep
+        public ProofStepChainContrapositive(Chain contrapositive,
+            Chain contrapositiveOf)
+        {
+            this.contrapositive = contrapositive;
+            this.contrapositiveOf = contrapositiveOf;
+            predecessors.Add(contrapositiveOf.getProofStep());
+        }
 
-	public override List<ProofStep> getPredecessorSteps()
-	{
-	    return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
-	}
+        // START-ProofStep
 
-	public override String getProof()
-	{
-	    return contrapositive.ToString();
-	}
+        public override List<ProofStep> getPredecessorSteps()
+        {
+            return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
+        }
 
-	public override String getJustification()
-	{
-	    return "Contrapositive: "
-		    + contrapositiveOf.getProofStep().getStepNumber();
-	}
+        public override String getProof()
+        {
+            return contrapositive.ToString();
+        }
 
-	// END-ProofStep
+        public override String getJustification()
+        {
+            return "Contrapositive: "
+                + contrapositiveOf.getProofStep().getStepNumber();
+        }
+
+        // END-ProofStep
     }
 }

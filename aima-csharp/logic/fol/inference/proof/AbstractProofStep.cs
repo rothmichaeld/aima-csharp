@@ -9,31 +9,31 @@ namespace aima.core.logic.fol.inference.proof
      */
     public abstract class AbstractProofStep : ProofStep
     {
-	private int step = 0;
+        private int step = 0;
 
-	public AbstractProofStep()
-	{
+        public AbstractProofStep()
+        {
 
-	}
+        }
 
-	// START-ProofStep
+        // START-ProofStep
 
-	public int getStepNumber()
-	{
-	    return step;
-	}
+        public int getStepNumber()
+        {
+            return step;
+        }
 
-	public void setStepNumber(int step)
-	{
-	    this.step = step;
-	}
+        public void setStepNumber(int step)
+        {
+            this.step = step;
+        }
 
-	public abstract List<ProofStep> getPredecessorSteps();
+        public abstract List<ProofStep> getPredecessorSteps();
 
-	public abstract String getProof();
+        public abstract String getProof();
 
-	public abstract String getJustification();
+        public abstract String getJustification();
 
-	// END-ProofStep
+        // END-ProofStep
     }
 }

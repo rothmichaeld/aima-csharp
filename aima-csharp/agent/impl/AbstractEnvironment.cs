@@ -1,7 +1,6 @@
+using aima.core.util;
 using System;
 using System.Collections.Generic;
-using aima.core.agent;
-using aima.core.util;
 
 namespace aima.core.agent.impl
 {
@@ -21,9 +20,9 @@ namespace aima.core.agent.impl
         protected LinkedHashSet<EnvironmentView> views = new LinkedHashSet<EnvironmentView>();
 
         protected Dictionary<Agent, Double> performanceMeasures = new Dictionary<Agent, Double>();
-                
+
         // PRUBLIC METHODS
-        
+
         // Methods to be implemented by subclasses.
         public abstract EnvironmentState getCurrentState();
 
@@ -36,7 +35,7 @@ namespace aima.core.agent.impl
          * does nothing.
          */
         public void createExogenousChange() { }
-                
+
         // START-Environment
         public List<Agent> getAgents()
         {
@@ -69,7 +68,7 @@ namespace aima.core.agent.impl
                 if (!agents.Contains(a))
                 {
                     agents.Add(a);
-                    this.updateEnvironmentViewsAgentAdded(a);
+                    updateEnvironmentViewsAgentAdded(a);
                 }
             }
         }
@@ -159,9 +158,9 @@ namespace aima.core.agent.impl
         }
 
         // END-Environment
-      
+
         // PROTECTED METHODS
-       
+
         protected void updatePerformanceMeasure(Agent forAgent, double addTo)
         {
             performanceMeasures[forAgent] = getPerformanceMeasure(forAgent)

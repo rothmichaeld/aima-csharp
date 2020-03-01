@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using aima.core.agent;
+using System.Collections.Generic;
 
 namespace aima.core.search.framework.problem
 {

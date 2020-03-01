@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace aima.core.search.framework.problem
 {
@@ -11,16 +10,16 @@ namespace aima.core.search.framework.problem
     public class DefaultGoalTest : GoalTest
     {
 
-    private Object goalState;
+        private readonly Object goalState;
 
-    public DefaultGoalTest(Object goalState)
-    {
-        this.goalState = goalState;
-    }
+        public DefaultGoalTest(Object goalState)
+        {
+            this.goalState = goalState;
+        }
 
-    public bool isGoalState(Object state)
-    {
-        return goalState.Equals(state);
+        public bool isGoalState(Object state)
+        {
+            return goalState.Equals(state);
+        }
     }
-}
 }

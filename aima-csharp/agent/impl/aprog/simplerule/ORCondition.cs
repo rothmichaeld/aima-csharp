@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
-using aima.core.agent.impl;
+using System.Text;
 
 namespace aima.core.agent.impl.aprog.simplerule
 {
@@ -14,9 +12,9 @@ namespace aima.core.agent.impl.aprog.simplerule
      */
     public class ORCondition : Condition
     {
-        private Condition left;
+        private readonly Condition left;
 
-        private Condition right;
+        private readonly Condition right;
 
         public ORCondition(Condition leftCon, Condition rightCon)
         {

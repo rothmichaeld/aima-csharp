@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using aima.core.logic.fol.parsing;
 
 namespace aima.core.logic.fol.parsing.ast
 {
@@ -10,30 +9,30 @@ namespace aima.core.logic.fol.parsing.ast
      */
     public class Constant : Term
     {
-	private String value;
-	private int hashCode = 0;
+        private readonly String value;
+        private int hashCode = 0;
 
-	public Constant(String s)
-	{
-	    value = s;
-	}
+        public Constant(String s)
+        {
+            value = s;
+        }
 
-	public String getValue()
-	{
-	    return value;
-	}
+        public String getValue()
+        {
+            return value;
+        }
 
-	// START-Term
+        // START-Term
 
-	public String getSymbolicName()
-	{
-	    return getValue();
-	}
+        public String getSymbolicName()
+        {
+            return getValue();
+        }
 
-	public bool isCompound()
-	{
-	    return false;
-	}
+        public bool isCompound()
+        {
+            return false;
+        }
 
         List<FOLNode> FOLNode.getArgs()
         {
@@ -41,16 +40,16 @@ namespace aima.core.logic.fol.parsing.ast
         }
 
         public List<Term> getArgs()
-	{
-	    // Is not Compound, therefore should
-	    // return null for its arguments
-	    return null;
-	}
+        {
+            // Is not Compound, therefore should
+            // return null for its arguments
+            return null;
+        }
 
-	public Object accept(FOLVisitor v, Object arg)
-	{
-	    return v.visitConstant(this, arg);
-	}
+        public Object accept(FOLVisitor v, Object arg)
+        {
+            return v.visitConstant(this, arg);
+        }
 
         FOLNode FOLNode.copy()
         {
@@ -58,41 +57,41 @@ namespace aima.core.logic.fol.parsing.ast
         }
 
         public Term copy()
-	{
-	    return new Constant(value);
-	}
+        {
+            return new Constant(value);
+        }
 
-	// END-Term
+        // END-Term
 
-	public override bool Equals(Object o)
-	{
+        public override bool Equals(Object o)
+        {
 
-	    if (this == o)
-	    {
-		return true;
-	    }
-	    if (!(o is Constant))
-	    {
-		return false;
-	    }
-	    Constant c = (Constant)o;
-	    return c.getValue().Equals(getValue());
+            if (this == o)
+            {
+                return true;
+            }
+            if (!(o is Constant))
+            {
+                return false;
+            }
+            Constant c = (Constant)o;
+            return c.getValue().Equals(getValue());
 
-	}
+        }
 
-	public override int GetHashCode()
-	{
-	    if (0 == hashCode)
-	    {
-		hashCode = 17;
-		hashCode = 37 * hashCode + value.GetHashCode();
-	    }
-	    return hashCode;
-	}
+        public override int GetHashCode()
+        {
+            if (0 == hashCode)
+            {
+                hashCode = 17;
+                hashCode = 37 * hashCode + value.GetHashCode();
+            }
+            return hashCode;
+        }
 
-	public override String ToString()
-	{
-	    return value;
-	}
+        public override String ToString()
+        {
+            return value;
+        }
     }
 }

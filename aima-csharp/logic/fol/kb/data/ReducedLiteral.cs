@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using aima.core.logic.fol.parsing.ast;
+using System;
+using System.Text;
 
 namespace aima.core.logic.fol.kb.data
 {
@@ -15,39 +14,39 @@ namespace aima.core.logic.fol.kb.data
      */
     public class ReducedLiteral : Literal
     {
-	private String strRep = null;
+        private String strRep = null;
 
-	public ReducedLiteral(AtomicSentence atom) : base(atom)
-	{
+        public ReducedLiteral(AtomicSentence atom) : base(atom)
+        {
 
-	}
+        }
 
-	public ReducedLiteral(AtomicSentence atom, bool negated) : base(atom, negated)
-	{
+        public ReducedLiteral(AtomicSentence atom, bool negated) : base(atom, negated)
+        {
 
-	}
+        }
 
-	public override Literal newInstance(AtomicSentence atom)
-	{
-	    return new ReducedLiteral(atom, isNegativeLiteral());
-	}
+        public override Literal newInstance(AtomicSentence atom)
+        {
+            return new ReducedLiteral(atom, isNegativeLiteral());
+        }
 
-	public override String ToString()
-	{
-	    if (null == strRep)
-	    {
-		StringBuilder sb = new StringBuilder();
-		sb.Append("[");
-		if (isNegativeLiteral())
-		{
-		    sb.Append("~");
-		}
-		sb.Append(getAtomicSentence().ToString());
-		sb.Append("]");
-		strRep = sb.ToString();
-	    }
+        public override String ToString()
+        {
+            if (null == strRep)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("[");
+                if (isNegativeLiteral())
+                {
+                    sb.Append("~");
+                }
+                sb.Append(getAtomicSentence().ToString());
+                sb.Append("]");
+                strRep = sb.ToString();
+            }
 
-	    return strRep;
-	}
+            return strRep;
+        }
     }
 }

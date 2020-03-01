@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using aima.core.agent;
 using aima.core.agent.impl.aprog.simplerule;
+using System.Collections.Generic;
 
 namespace aima.core.agent.impl.aprog
 {
@@ -57,7 +56,7 @@ namespace aima.core.agent.impl.aprog
 	 * @param state
 	 *            the agent's current conception of the world state.
 	 */
-         public void setState(DynamicState dstate)
+        public void setState(DynamicState dstate)
         {
             state = dstate;
         }
@@ -70,7 +69,7 @@ namespace aima.core.agent.impl.aprog
 	 *            a description of how the next state depends on the current
 	 *            state and action.
 	 */
-         public void setModel(Model mod)
+        public void setModel(Model mod)
         {
             model = mod;
         }

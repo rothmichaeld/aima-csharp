@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace aima.core.util
 {
@@ -12,8 +11,8 @@ namespace aima.core.util
      */
     public class Point2D
     {
-        private double x;
-        private double y;
+        private readonly double x;
+        private readonly double y;
 
         public Point2D(double x, double y)
         {

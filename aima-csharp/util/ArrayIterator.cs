@@ -11,24 +11,12 @@ namespace aima.core.util
      */
     public class ArrayIterator<T> : IEnumerator<T>
     {
-        T[] values;
-        int counter;
+        private readonly T[] values;
+        private int counter;
 
-        public T Current
-        {
-            get
-            {
-                return values[counter];
-            }
-        }
+        public T Current => values[counter];
 
-        object IEnumerator.Current
-        {
-            get
-            {
-                return Current;
-            }
-        }
+        object IEnumerator.Current => Current;
 
         public ArrayIterator(T[] values)
         {
@@ -50,7 +38,7 @@ namespace aima.core.util
         {
             throw new NotSupportedException();
         }
-               
+
         public bool MoveNext()
         {
             counter++;

@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-using aima.core.agent;
-using aima.core.agent.impl;
 using aima.core.util;
+using System.Collections.Generic;
 
 namespace aima.core.agent.impl.aprog
 {
@@ -29,9 +27,9 @@ namespace aima.core.agent.impl.aprog
      */
     public class TableDrivenAgentProgram : AgentProgram
     {
-        private List<Percept> percepts = new List<Percept>();
+        private readonly List<Percept> percepts = new List<Percept>();
 
-        private Table<List<Percept>, System.String, Action> table;
+        private readonly Table<List<Percept>, System.String, Action> table;
 
         private const System.String ACTION = "action";
 
@@ -49,8 +47,10 @@ namespace aima.core.agent.impl.aprog
         {
             List<List<Percept>> rowHeaders = new List<List<Percept>>(perceptSequenceActions.Keys);
 
-            List<System.String> colHeaders = new List<System.String>();
-            colHeaders.Add(ACTION);
+            List<System.String> colHeaders = new List<System.String>
+            {
+                ACTION
+            };
 
             table = new Table<List<Percept>, System.String, Action>(rowHeaders, colHeaders);
 

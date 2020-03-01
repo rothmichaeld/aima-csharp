@@ -8,8 +8,8 @@ namespace aima.core.logic.fol
      */
     public interface StandardizeApartIndexical
     {
-	String getPrefix();
+        String getPrefix();
 
-	int getNextIndex();
+        int getNextIndex();
     }
 }

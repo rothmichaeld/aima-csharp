@@ -8,8 +8,8 @@ namespace aima.core.logic.fol.parsing.ast
      */
     public interface AtomicSentence : Sentence
     {
-	List<Term> getArgs();
+        List<Term> getArgs();
 
-	AtomicSentence copy();
+        AtomicSentence copy();
     }
 }

@@ -8,13 +8,13 @@ namespace aima.core.logic.fol.domain
      */
     public abstract class FOLDomainEvent
     {
-	private static readonly long serialVersionUID = 1L;
+        private static readonly long serialVersionUID = 1L;
 
-	public FOLDomainEvent(Object source)
-	{
-	    
-	}
+        public FOLDomainEvent(Object source)
+        {
 
-	public abstract void notifyListener(FOLDomainListener listener);
+        }
+
+        public abstract void notifyListener(FOLDomainListener listener);
     }
 }

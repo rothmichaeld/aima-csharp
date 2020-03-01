@@ -12,7 +12,7 @@ namespace aima.core.util
      */
     public class FrequencyCounter<T>
     {
-        private Dictionary<T, int> counter;
+        private readonly Dictionary<T, int> counter;
         private int total;
 
         /**
@@ -54,7 +54,7 @@ namespace aima.core.util
         public void incrementFor(T key)
         {
             int value = counter[key];
-            if(value == null)
+            if (value == null)
             {
                 counter.Add(key, 1);
             }

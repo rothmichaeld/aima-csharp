@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace aima.core.logic.common
@@ -16,140 +15,140 @@ namespace aima.core.logic.common
      */
     public abstract class Lexer
     {
-	protected int lookAheadBufferSize = 1;
-	//
-	private static readonly int END_OF_INPUT = -1;
-	//
-	private StringReader input;
-	public int[] lookAheadBuffer;
-	private int currentPositionInInput;
+        protected int lookAheadBufferSize = 1;
+        //
+        private static readonly int END_OF_INPUT = -1;
+        //
+        private StringReader input;
+        public int[] lookAheadBuffer;
+        private int currentPositionInInput;
 
-	/**
-	 * Sets the character stream of the lexical analyzer.
-	 * 
-	 * @param inputString
-	 *            a sequence of characters to be converted into a sequence of
-	 *            tokens.
-	 */
-	public void setInput(String inputString)
-	{
-	    this.input = new StringReader(inputString);
-	}
+        /**
+         * Sets the character stream of the lexical analyzer.
+         * 
+         * @param inputString
+         *            a sequence of characters to be converted into a sequence of
+         *            tokens.
+         */
+        public void setInput(String inputString)
+        {
+            input = new StringReader(inputString);
+        }
 
-	/**
-	 * Set the character stream reader of the lexical analyzer.
-	 * 
-	 * @param inputReader
-	 *            a reader on a sequence of characters to be converted into a
-	 *            sequence of tokens.
-	 */
-	public void setInput(StringReader inputReader)
-	{
-	    input = inputReader;
-	    lookAheadBuffer = new int[lookAheadBufferSize];
-	    currentPositionInInput = 0;
-	    initializeLookAheadBuffer();
-	}
+        /**
+         * Set the character stream reader of the lexical analyzer.
+         * 
+         * @param inputReader
+         *            a reader on a sequence of characters to be converted into a
+         *            sequence of tokens.
+         */
+        public void setInput(StringReader inputReader)
+        {
+            input = inputReader;
+            lookAheadBuffer = new int[lookAheadBufferSize];
+            currentPositionInInput = 0;
+            initializeLookAheadBuffer();
+        }
 
-	/**
-	 * To be implemented by concrete implementations
-	 * 
-	 * @return the next token from the input.
-	 */
-	public abstract Token nextToken();
+        /**
+         * To be implemented by concrete implementations
+         * 
+         * @return the next token from the input.
+         */
+        public abstract Token nextToken();
 
-	// PROTECTED
-	
-	protected int getCurrentPositionInInput()
-	{
-	    return currentPositionInInput;
-	}
+        // PROTECTED
 
-	/*
-	 * Returns the character at the specified position in the lookahead buffer.
-	 */
-	protected char lookAhead(int position)
-	{
-	    return (char)lookAheadBuffer[position - 1];
-	}
+        protected int getCurrentPositionInInput()
+        {
+            return currentPositionInInput;
+        }
 
-	/**
-	 * Consume 1 character from the input.
-	 */
-	protected void consume()
-	{
-	    currentPositionInInput++;
-	    loadNextCharacterFromInput();
-	}
+        /*
+         * Returns the character at the specified position in the lookahead buffer.
+         */
+        protected char lookAhead(int position)
+        {
+            return (char)lookAheadBuffer[position - 1];
+        }
 
-	// PRIVATE
-	
-	/**
-	 * Returns true if the end of the stream has been reached.
-	 */
-	private bool isEndOfInput(int i)
-	{
-	    return (END_OF_INPUT == i);
-	}
+        /**
+         * Consume 1 character from the input.
+         */
+        protected void consume()
+        {
+            currentPositionInInput++;
+            loadNextCharacterFromInput();
+        }
 
-	/**
-	 * Initialize the look ahead buffer from the input.
-	 */
-	private void initializeLookAheadBuffer()
-	{
-	    for (int i = 0; i < lookAheadBufferSize; i++)
-	    {
-		// Mark th entire buffer as being end of input.
-		lookAheadBuffer[i] = END_OF_INPUT;
-	    }
-	    for (int i = 0; i < lookAheadBufferSize; i++)
-	    {
-		// Now fill the buffer (if possible) from the input.
-		lookAheadBuffer[i] = readInput();
-		if (isEndOfInput(lookAheadBuffer[i]))
-		{
-		    // The input is smaller than the buffer size
-		    break;
-		}
-	    }
-	}
+        // PRIVATE
 
-	/**
-	 * Loads the next character into the lookahead buffer if the end of the
-	 * stream has not already been reached.
-	 */
-	private void loadNextCharacterFromInput()
-	{
-	    bool eoiEncountered = false;
-	    for (int i = 0; i < lookAheadBufferSize - 1; i++)
-	    {
-		lookAheadBuffer[i] = lookAheadBuffer[i + 1];
-		if (isEndOfInput(lookAheadBuffer[i]))
-		{
-		    eoiEncountered = true;
-		    break;
-		}
-	    }
-	    if (!eoiEncountered)
-	    {
-		lookAheadBuffer[lookAheadBufferSize - 1] = readInput();
-	    }
-	}
+        /**
+         * Returns true if the end of the stream has been reached.
+         */
+        private bool isEndOfInput(int i)
+        {
+            return (END_OF_INPUT == i);
+        }
 
-	private int readInput()
-	{
-	    int read = -1;
+        /**
+         * Initialize the look ahead buffer from the input.
+         */
+        private void initializeLookAheadBuffer()
+        {
+            for (int i = 0; i < lookAheadBufferSize; i++)
+            {
+                // Mark th entire buffer as being end of input.
+                lookAheadBuffer[i] = END_OF_INPUT;
+            }
+            for (int i = 0; i < lookAheadBufferSize; i++)
+            {
+                // Now fill the buffer (if possible) from the input.
+                lookAheadBuffer[i] = readInput();
+                if (isEndOfInput(lookAheadBuffer[i]))
+                {
+                    // The input is smaller than the buffer size
+                    break;
+                }
+            }
+        }
 
-	    try
-	    {
-		read = input.Read();
-	    }
-	    catch (IOException ioe)
-	    {
-		throw new LexerException("IOException thrown reading input.",
-				currentPositionInInput, ioe);
-	    }
-	    return read;
-	}
+        /**
+         * Loads the next character into the lookahead buffer if the end of the
+         * stream has not already been reached.
+         */
+        private void loadNextCharacterFromInput()
+        {
+            bool eoiEncountered = false;
+            for (int i = 0; i < lookAheadBufferSize - 1; i++)
+            {
+                lookAheadBuffer[i] = lookAheadBuffer[i + 1];
+                if (isEndOfInput(lookAheadBuffer[i]))
+                {
+                    eoiEncountered = true;
+                    break;
+                }
+            }
+            if (!eoiEncountered)
+            {
+                lookAheadBuffer[lookAheadBufferSize - 1] = readInput();
+            }
+        }
+
+        private int readInput()
+        {
+            int read = -1;
+
+            try
+            {
+                read = input.Read();
+            }
+            catch (IOException ioe)
+            {
+                throw new LexerException("IOException thrown reading input.",
+                        currentPositionInInput, ioe);
+            }
+            return read;
+        }
     }
 }

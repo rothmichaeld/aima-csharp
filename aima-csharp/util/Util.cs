@@ -15,8 +15,8 @@ namespace aima.core.util
         public const String NO = "No";
 
         public const String YES = "Yes";
-        
-        private static Random r = new Random();
+
+        private static readonly Random r = new Random();
 
         /**
 	 * Get the first element from a list.
@@ -50,12 +50,12 @@ namespace aima.core.util
 	    *        the sets initial values.
 	    * @return a Set of the provided values.
 	    */
-    
+
         public static HashSet<T> createSet<T>(params T[] values)
         {
             HashSet<T> set = new HashSet<T>();
 
-            foreach(T t in values)
+            foreach (T t in values)
             {
                 set.Add(t);
             }

@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
-using System.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 
 namespace aima.core.logic.fol.kb.data
 {
@@ -16,36 +15,36 @@ namespace aima.core.logic.fol.kb.data
      */
     public class CNF
     {
-	private List<Clause> conjunctionOfClauses = new List<Clause>();
+        private readonly List<Clause> conjunctionOfClauses = new List<Clause>();
 
-	public CNF(List<Clause> conjunctionOfClauses)
-	{
-	    this.conjunctionOfClauses.AddRange(conjunctionOfClauses);
-	}
+        public CNF(List<Clause> conjunctionOfClauses)
+        {
+            this.conjunctionOfClauses.AddRange(conjunctionOfClauses);
+        }
 
-	public int getNumberOfClauses()
-	{
-	    return conjunctionOfClauses.Count;
-	}
+        public int getNumberOfClauses()
+        {
+            return conjunctionOfClauses.Count;
+        }
 
-	public List<Clause> getConjunctionOfClauses()
-	{
-	    return new ReadOnlyCollection<Clause>(conjunctionOfClauses).ToList<Clause>();
-	}
+        public List<Clause> getConjunctionOfClauses()
+        {
+            return new ReadOnlyCollection<Clause>(conjunctionOfClauses).ToList<Clause>();
+        }
 
-	public override String ToString()
-	{
-	    StringBuilder sb = new StringBuilder();
-	    for (int i = 0; i < conjunctionOfClauses.Count; i++)
-	    {
-		if (i > 0)
-		{
-		    sb.Append(",");
-		}
-		sb.Append(conjunctionOfClauses[i].ToString());
-	    }
+        public override String ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < conjunctionOfClauses.Count; i++)
+            {
+                if (i > 0)
+                {
+                    sb.Append(",");
+                }
+                sb.Append(conjunctionOfClauses[i].ToString());
+            }
 
-	    return sb.ToString();
-	}
+            return sb.ToString();
+        }
     }
 }

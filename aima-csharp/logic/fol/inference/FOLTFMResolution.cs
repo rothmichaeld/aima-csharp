@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using aima.core.logic.fol;
 using aima.core.logic.fol.inference.proof;
 using aima.core.logic.fol.inference.trace;
 using aima.core.logic.fol.kb;
 using aima.core.logic.fol.kb.data;
 using aima.core.logic.fol.parsing.ast;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace aima.core.logic.fol.inference
 {
@@ -31,329 +30,329 @@ namespace aima.core.logic.fol.inference
      */
     public class FOLTFMResolution : InferenceProcedure
     {
-	private long maxQueryTime = 10 * 1000;
+        private long maxQueryTime = 10 * 1000;
 
-	private FOLTFMResolutionTracer tracer = null;
+        private FOLTFMResolutionTracer tracer = null;
 
-	public FOLTFMResolution()
-	{
+        public FOLTFMResolution()
+        {
 
-	}
+        }
 
-	public FOLTFMResolution(long maxQueryTime)
-	{
-	    setMaxQueryTime(maxQueryTime);
-	}
+        public FOLTFMResolution(long maxQueryTime)
+        {
+            setMaxQueryTime(maxQueryTime);
+        }
 
-	public FOLTFMResolution(FOLTFMResolutionTracer tracer)
-	{
-	    setTracer(tracer);
-	}
+        public FOLTFMResolution(FOLTFMResolutionTracer tracer)
+        {
+            setTracer(tracer);
+        }
 
-	public long getMaxQueryTime()
-	{
-	    return maxQueryTime;
-	}
+        public long getMaxQueryTime()
+        {
+            return maxQueryTime;
+        }
 
-	public void setMaxQueryTime(long maxQueryTime)
-	{
-	    this.maxQueryTime = maxQueryTime;
-	}
+        public void setMaxQueryTime(long maxQueryTime)
+        {
+            this.maxQueryTime = maxQueryTime;
+        }
 
-	public FOLTFMResolutionTracer getTracer()
-	{
-	    return tracer;
-	}
+        public FOLTFMResolutionTracer getTracer()
+        {
+            return tracer;
+        }
 
-	public void setTracer(FOLTFMResolutionTracer tracer)
-	{
-	    this.tracer = tracer;
-	}
-	
-	// START-InferenceProcedure
-	public InferenceResult ask(FOLKnowledgeBase KB, Sentence alpha)
-	{
+        public void setTracer(FOLTFMResolutionTracer tracer)
+        {
+            this.tracer = tracer;
+        }
 
-	    // clauses <- the set of clauses in CNF representation of KB ^ ~alpha
-	    List<Clause> clauses = new List<Clause>();
-	    foreach (Clause c in KB.getAllClauses())
-	    {
-		Clause c2 = KB.standardizeApart(c);
-		c2.setStandardizedApartCheckNotRequired();
-		clauses.AddRange(c2.getFactors());
-	    }
-	    Sentence notAlpha = new NotSentence(alpha);
-	    // Want to use an answer literal to pull
-	    // query variables where necessary
-	    Literal answerLiteral = KB.createAnswerLiteral(notAlpha);
-	    List<Variable> answerLiteralVariables = KB
-		    .collectAllVariables(answerLiteral.getAtomicSentence());
-	    Clause answerClause = new Clause();
+        // START-InferenceProcedure
+        public InferenceResult ask(FOLKnowledgeBase KB, Sentence alpha)
+        {
 
-	    if (answerLiteralVariables.Count > 0)
-	    {
-		Sentence notAlphaWithAnswer = new ConnectedSentence(Connectors.OR,
-			notAlpha, answerLiteral.getAtomicSentence());
-		foreach (Clause c in KB.convertToClauses(notAlphaWithAnswer))
-		{
-		    Clause c2 = KB.standardizeApart(c);
-		    c2.setProofStep(new ProofStepGoal(c2));
-		    c2.setStandardizedApartCheckNotRequired();
-		    clauses.AddRange(c2.getFactors());
-		}
+            // clauses <- the set of clauses in CNF representation of KB ^ ~alpha
+            List<Clause> clauses = new List<Clause>();
+            foreach (Clause c in KB.getAllClauses())
+            {
+                Clause c2 = KB.standardizeApart(c);
+                c2.setStandardizedApartCheckNotRequired();
+                clauses.AddRange(c2.getFactors());
+            }
+            Sentence notAlpha = new NotSentence(alpha);
+            // Want to use an answer literal to pull
+            // query variables where necessary
+            Literal answerLiteral = KB.createAnswerLiteral(notAlpha);
+            List<Variable> answerLiteralVariables = KB
+                .collectAllVariables(answerLiteral.getAtomicSentence());
+            Clause answerClause = new Clause();
 
-		answerClause.addLiteral(answerLiteral);
-	    }
-	    else
-	    {
-		foreach (Clause c in KB.convertToClauses(notAlpha))
-		{
-		    Clause c2 = KB.standardizeApart(c);
-		    c2.setProofStep(new ProofStepGoal(c2));
-		    c2.setStandardizedApartCheckNotRequired();
-		    clauses.AddRange(c2.getFactors());
-		}
-	    }
+            if (answerLiteralVariables.Count > 0)
+            {
+                Sentence notAlphaWithAnswer = new ConnectedSentence(Connectors.OR,
+                    notAlpha, answerLiteral.getAtomicSentence());
+                foreach (Clause c in KB.convertToClauses(notAlphaWithAnswer))
+                {
+                    Clause c2 = KB.standardizeApart(c);
+                    c2.setProofStep(new ProofStepGoal(c2));
+                    c2.setStandardizedApartCheckNotRequired();
+                    clauses.AddRange(c2.getFactors());
+                }
 
-	    TFMAnswerHandler ansHandler = new TFMAnswerHandler(answerLiteral,
-		    answerLiteralVariables, answerClause, maxQueryTime);
+                answerClause.addLiteral(answerLiteral);
+            }
+            else
+            {
+                foreach (Clause c in KB.convertToClauses(notAlpha))
+                {
+                    Clause c2 = KB.standardizeApart(c);
+                    c2.setProofStep(new ProofStepGoal(c2));
+                    c2.setStandardizedApartCheckNotRequired();
+                    clauses.AddRange(c2.getFactors());
+                }
+            }
 
-	    // new <- {}
-	    List<Clause> newClauses = new List<Clause>();
-	    List<Clause> toAdd = new List<Clause>();
-	    // loop do
-	    int noOfPrevClauses = clauses.Count;
-	    do
-	    {
-		if (null != tracer)
-		{
-		    tracer.stepStartWhile(new HashSet<Clause>(clauses), clauses.Count, newClauses
-			    .Count);
-		}
+            TFMAnswerHandler ansHandler = new TFMAnswerHandler(answerLiteral,
+                answerLiteralVariables, answerClause, maxQueryTime);
 
-		newClauses.Clear();
+            // new <- {}
+            List<Clause> newClauses = new List<Clause>();
+            List<Clause> toAdd = new List<Clause>();
+            // loop do
+            int noOfPrevClauses = clauses.Count;
+            do
+            {
+                if (null != tracer)
+                {
+                    tracer.stepStartWhile(new HashSet<Clause>(clauses), clauses.Count, newClauses
+                        .Count);
+                }
 
-		// for each Ci, Cj in clauses do
-		Clause[] clausesA = new Clause[clauses.Count];
-		clausesA = clauses.ToArray();
-		// Basically, using the simple T)wo F)inger M)ethod here.
-		for (int i = 0; i < clausesA.Length; i++)
-		{
-		    Clause cI = clausesA[i];
-		    if (null != tracer)
-		    {
-			tracer.stepOuterFor(cI);
-		    }
-		    for (int j = i; j < clausesA.Length; j++)
-		    {
-			Clause cJ = clausesA[j];
+                newClauses.Clear();
 
-			if (null != tracer)
-			{
-			    tracer.stepInnerFor(cI, cJ);
-			}
+                // for each Ci, Cj in clauses do
+                Clause[] clausesA = new Clause[clauses.Count];
+                clausesA = clauses.ToArray();
+                // Basically, using the simple T)wo F)inger M)ethod here.
+                for (int i = 0; i < clausesA.Length; i++)
+                {
+                    Clause cI = clausesA[i];
+                    if (null != tracer)
+                    {
+                        tracer.stepOuterFor(cI);
+                    }
+                    for (int j = i; j < clausesA.Length; j++)
+                    {
+                        Clause cJ = clausesA[j];
 
-			// resolvent <- FOL-RESOLVE(Ci, Cj)
-			List<Clause> resolvents = cI.binaryResolvents(cJ);
+                        if (null != tracer)
+                        {
+                            tracer.stepInnerFor(cI, cJ);
+                        }
 
-			if (resolvents.Count > 0)
-			{
-			    toAdd.Clear();
-			    // new <- new <UNION> resolvent
-			    foreach (Clause rc in resolvents)
-			    {
-				toAdd.AddRange(rc.getFactors());
-			    }
+                        // resolvent <- FOL-RESOLVE(Ci, Cj)
+                        List<Clause> resolvents = cI.binaryResolvents(cJ);
 
-			    if (null != tracer)
-			    {
-				tracer.stepResolved(cI, cJ, new HashSet<Clause>(toAdd));
-			    }
+                        if (resolvents.Count > 0)
+                        {
+                            toAdd.Clear();
+                            // new <- new <UNION> resolvent
+                            foreach (Clause rc in resolvents)
+                            {
+                                toAdd.AddRange(rc.getFactors());
+                            }
 
-			    ansHandler.checkForPossibleAnswers(toAdd);
+                            if (null != tracer)
+                            {
+                                tracer.stepResolved(cI, cJ, new HashSet<Clause>(toAdd));
+                            }
 
-			    if (ansHandler.isComplete())
-			    {
-				break;
-			    }
+                            ansHandler.checkForPossibleAnswers(toAdd);
 
-			    newClauses.AddRange(toAdd);
-			}
+                            if (ansHandler.isComplete())
+                            {
+                                break;
+                            }
 
-			if (ansHandler.isComplete())
-			{
-			    break;
-			}
-		    }
-		    if (ansHandler.isComplete())
-		    {
-			break;
-		    }
-		}
+                            newClauses.AddRange(toAdd);
+                        }
 
-		noOfPrevClauses = clauses.Count;
+                        if (ansHandler.isComplete())
+                        {
+                            break;
+                        }
+                    }
+                    if (ansHandler.isComplete())
+                    {
+                        break;
+                    }
+                }
 
-		// clauses <- clauses <UNION> new
-		clauses.AddRange(newClauses);
+                noOfPrevClauses = clauses.Count;
 
-		if (ansHandler.isComplete())
-		{
-		    break;
-		}
+                // clauses <- clauses <UNION> new
+                clauses.AddRange(newClauses);
 
-		// if new is a <SUBSET> of clauses then finished
-		// searching for an answer
-		// (i.e. when they were added the # clauses
-		// did not increase).
-	    } while (noOfPrevClauses < clauses.Count);
+                if (ansHandler.isComplete())
+                {
+                    break;
+                }
 
-	    if (null != tracer)
-	    {
-		tracer.stepFinished(new HashSet<Clause>(clauses), ansHandler);
-	    }
+                // if new is a <SUBSET> of clauses then finished
+                // searching for an answer
+                // (i.e. when they were added the # clauses
+                // did not increase).
+            } while (noOfPrevClauses < clauses.Count);
 
-	    return ansHandler;
-	}
+            if (null != tracer)
+            {
+                tracer.stepFinished(new HashSet<Clause>(clauses), ansHandler);
+            }
 
-	// END-InferenceProcedure
-	// 
+            return ansHandler;
+        }
 
-	//
-	// PRIVATE METHODS
-	//
-	class TFMAnswerHandler : InferenceResult
-	{
-	    private Literal answerLiteral = null;
-	    private List<Variable> answerLiteralVariables = null;
-	    private Clause answerClause = null;
-	    private long finishTime = 0L;
-	    private bool complete = false;
-	    private List<Proof> proofs = new List<Proof>();
-	    private bool timedOut = false;
+        // END-InferenceProcedure
+        // 
 
-	    public TFMAnswerHandler(Literal answerLiteral,
-		    List<Variable> answerLiteralVariables, Clause answerClause,
-		    long maxQueryTime)
-	    {
-		this.answerLiteral = answerLiteral;
-		this.answerLiteralVariables = answerLiteralVariables;
-		this.answerClause = answerClause;
-		//
-		this.finishTime = DateTime.UtcNow.Ticks + maxQueryTime;
-	    }
+        //
+        // PRIVATE METHODS
+        //
+        private class TFMAnswerHandler : InferenceResult
+        {
+            private readonly Literal answerLiteral = null;
+            private readonly List<Variable> answerLiteralVariables = null;
+            private readonly Clause answerClause = null;
+            private readonly long finishTime = 0L;
+            private bool complete = false;
+            private readonly List<Proof> proofs = new List<Proof>();
+            private bool timedOut = false;
 
-	    //
-	    // START-InferenceResult
-	    public bool isPossiblyFalse()
-	    {
-		return !timedOut && proofs.Count == 0;
-	    }
+            public TFMAnswerHandler(Literal answerLiteral,
+                List<Variable> answerLiteralVariables, Clause answerClause,
+                long maxQueryTime)
+            {
+                this.answerLiteral = answerLiteral;
+                this.answerLiteralVariables = answerLiteralVariables;
+                this.answerClause = answerClause;
+                //
+                finishTime = DateTime.UtcNow.Ticks + maxQueryTime;
+            }
 
-	    public bool isTrue()
-	    {
-		return proofs.Count > 0;
-	    }
+            //
+            // START-InferenceResult
+            public bool isPossiblyFalse()
+            {
+                return !timedOut && proofs.Count == 0;
+            }
 
-	    public bool isUnknownDueToTimeout()
-	    {
-		return timedOut && proofs.Count == 0;
-	    }
+            public bool isTrue()
+            {
+                return proofs.Count > 0;
+            }
 
-	    public bool isPartialResultDueToTimeout()
-	    {
-		return timedOut && proofs.Count > 0;
-	    }
+            public bool isUnknownDueToTimeout()
+            {
+                return timedOut && proofs.Count == 0;
+            }
 
-	    public List<Proof> getProofs()
-	    {
-		return proofs;
-	    }
+            public bool isPartialResultDueToTimeout()
+            {
+                return timedOut && proofs.Count > 0;
+            }
 
-	    // END-InferenceResult
-	    
-	    public bool isComplete()
-	    {
-		return complete;
-	    }
+            public List<Proof> getProofs()
+            {
+                return proofs;
+            }
 
-	    public void checkForPossibleAnswers(List<Clause> resolvents)
-	    {
-		// If no bindings being looked for, then
-		// is just a true false query.
-		foreach (Clause aClause in resolvents)
-		{
-		    if (answerClause.isEmpty())
-		    {
-			if (aClause.isEmpty())
-			{
-			    proofs.Add(new ProofFinal(aClause.getProofStep(),
-				    new Dictionary<Variable, Term>()));
-			    complete = true;
-			}
-		    }
-		    else
-		    {
-			if (aClause.isEmpty())
-			{
-			    // This should not happen
-			    // as added an answer literal, which
-			    // implies the database (i.e. premises) are
-			    // unsatisfiable to begin with.
-			    throw new ApplicationException(
-				    "Generated an empty clause while looking for an answer, implies original KB is unsatisfiable");
-			}
+            // END-InferenceResult
 
-			if (aClause.isUnitClause()
-				&& aClause.isDefiniteClause()
-				&& aClause.getPositiveLiterals()[0]
-					.getAtomicSentence().getSymbolicName()
-					.Equals(
-						answerLiteral.getAtomicSentence()
-							.getSymbolicName()))
-			{
-			    Dictionary<Variable, Term> answerBindings = new Dictionary<Variable, Term>();
-			    List<Term> answerTerms = aClause.getPositiveLiterals()
-				    [0].getAtomicSentence().getArgs();
-			    int idx = 0;
-			    foreach (Variable v in answerLiteralVariables)
-			    {
-				answerBindings.Add(v, (Term)answerTerms[idx]);
-				idx++;
-			    }
-			    bool addNewAnswer = true;
-			    foreach (Proof p in proofs)
-			    {
-				if (p.getAnswerBindings().Equals(answerBindings))
-				{
-				    addNewAnswer = false;
-				    break;
-				}
-			    }
-			    if (addNewAnswer)
-			    {
-				proofs.Add(new ProofFinal(aClause.getProofStep(),
-					answerBindings));
-			    }
-			}
-		    }
+            public bool isComplete()
+            {
+                return complete;
+            }
 
-		    if (DateTime.UtcNow.Ticks > finishTime)
-		    {
-			complete = true;
-			// Indicate that I have run out of query time
-			timedOut = true;
-		    }
-		}
-	    }
+            public void checkForPossibleAnswers(List<Clause> resolvents)
+            {
+                // If no bindings being looked for, then
+                // is just a true false query.
+                foreach (Clause aClause in resolvents)
+                {
+                    if (answerClause.isEmpty())
+                    {
+                        if (aClause.isEmpty())
+                        {
+                            proofs.Add(new ProofFinal(aClause.getProofStep(),
+                                new Dictionary<Variable, Term>()));
+                            complete = true;
+                        }
+                    }
+                    else
+                    {
+                        if (aClause.isEmpty())
+                        {
+                            // This should not happen
+                            // as added an answer literal, which
+                            // implies the database (i.e. premises) are
+                            // unsatisfiable to begin with.
+                            throw new ApplicationException(
+                                "Generated an empty clause while looking for an answer, implies original KB is unsatisfiable");
+                        }
 
-	    public override String ToString()
-	    {
-		StringBuilder sb = new StringBuilder();
-		sb.Append("isComplete=" + complete);
-		sb.Append("\n");
-		sb.Append("result=" + proofs);
-		return sb.ToString();
-	    }
-	}
+                        if (aClause.isUnitClause()
+                            && aClause.isDefiniteClause()
+                            && aClause.getPositiveLiterals()[0]
+                                .getAtomicSentence().getSymbolicName()
+                                .Equals(
+                                    answerLiteral.getAtomicSentence()
+                                        .getSymbolicName()))
+                        {
+                            Dictionary<Variable, Term> answerBindings = new Dictionary<Variable, Term>();
+                            List<Term> answerTerms = aClause.getPositiveLiterals()
+                                [0].getAtomicSentence().getArgs();
+                            int idx = 0;
+                            foreach (Variable v in answerLiteralVariables)
+                            {
+                                answerBindings.Add(v, answerTerms[idx]);
+                                idx++;
+                            }
+                            bool addNewAnswer = true;
+                            foreach (Proof p in proofs)
+                            {
+                                if (p.getAnswerBindings().Equals(answerBindings))
+                                {
+                                    addNewAnswer = false;
+                                    break;
+                                }
+                            }
+                            if (addNewAnswer)
+                            {
+                                proofs.Add(new ProofFinal(aClause.getProofStep(),
+                                    answerBindings));
+                            }
+                        }
+                    }
+
+                    if (DateTime.UtcNow.Ticks > finishTime)
+                    {
+                        complete = true;
+                        // Indicate that I have run out of query time
+                        timedOut = true;
+                    }
+                }
+            }
+
+            public override String ToString()
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("isComplete=" + complete);
+                sb.Append("\n");
+                sb.Append("result=" + proofs);
+                return sb.ToString();
+            }
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using aima.core.agent;
 using aima.core.search.framework.problem;
 
@@ -14,35 +13,35 @@ namespace aima.core.environment.map
      */
     public class MapStepCostFunction : StepCostFunction
     {
-	private Map map = null;
-		
-	// Used by Uniform-cost search to ensure every step is greater than or equal
-	// to some small positive constant
-	private static double constantCost = 1.0;
+        private readonly Map map = null;
 
-	public MapStepCostFunction(Map map)
-	{
-	    this.map = map;
-	}
+        // Used by Uniform-cost search to ensure every step is greater than or equal
+        // to some small positive constant
+        private static readonly double constantCost = 1.0;
 
-	//
-	// START-StepCostFunction
-	public double c(object fromCurrentState, Action action, object toNextState)
-	{
+        public MapStepCostFunction(Map map)
+        {
+            this.map = map;
+        }
 
-	    string fromLoc = fromCurrentState.ToString();
-	    string toLoc = toNextState.ToString();
+        //
+        // START-StepCostFunction
+        public double c(object fromCurrentState, Action action, object toNextState)
+        {
 
-	    double distance = map.getDistance(fromLoc, toLoc);
+            string fromLoc = fromCurrentState.ToString();
+            string toLoc = toNextState.ToString();
 
-	    if (distance == null || distance <= 0)
-	    {
-		return constantCost;
-	    }
+            double distance = map.getDistance(fromLoc, toLoc);
 
-	    return distance;
-	}
+            if (distance == null || distance <= 0)
+            {
+                return constantCost;
+            }
 
-	// END-StepCostFunction
+            return distance;
+        }
+
+        // END-StepCostFunction
     }
 }

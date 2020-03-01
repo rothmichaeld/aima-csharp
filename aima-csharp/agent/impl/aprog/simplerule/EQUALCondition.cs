@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
-using aima.core.agent.impl;
+using System.Text;
 
 namespace aima.core.agent.impl.aprog.simplerule
 {
@@ -12,11 +10,11 @@ namespace aima.core.agent.impl.aprog.simplerule
      * @author Ciaran O'Reilly
      * 
      */
-     public class EQUALCondition : Condition
+    public class EQUALCondition : Condition
     {
-        private Object key;
+        private readonly Object key;
 
-        private Object value;
+        private readonly Object value;
 
         public EQUALCondition(Object k, Object val)
         {

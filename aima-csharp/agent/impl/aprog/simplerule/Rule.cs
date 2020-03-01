@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
-using aima.core.agent;
-using aima.core.agent.impl;
+using System.Text;
 
 namespace aima.core.agent.impl.aprog.simplerule
 {
@@ -12,11 +9,11 @@ namespace aima.core.agent.impl.aprog.simplerule
      * @author Ciaran O'Reilly
      * @author Mike Stampone
      */
-     public class Rule
+    public class Rule
     {
-        private Condition con;
+        private readonly Condition con;
 
-        private Action action;
+        private readonly Action action;
 
 
         /**

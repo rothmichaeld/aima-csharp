@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using System.Collections.ObjectModel;
-using aima.core.logic.fol.parsing;
+using System.Linq;
+using System.Text;
 
 namespace aima.core.logic.fol.parsing.ast
 {
@@ -13,69 +12,69 @@ namespace aima.core.logic.fol.parsing.ast
      */
     public class QuantifiedSentence : Sentence
     {
-	private String quantifier;
-	private List<Variable> variables = new List<Variable>();
-	private Sentence quantified;
-	private List<FOLNode> args = new List<FOLNode>();
-	private String stringRep = null;
-	private int hashCode = 0;
+        private readonly String quantifier;
+        private readonly List<Variable> variables = new List<Variable>();
+        private readonly Sentence quantified;
+        private readonly List<FOLNode> args = new List<FOLNode>();
+        private String stringRep = null;
+        private int hashCode = 0;
 
-	public QuantifiedSentence(String quantifier, List<Variable> variables,
-	       Sentence quantified)
-	{
-	    this.quantifier = quantifier;
-	    this.variables.AddRange(variables);
-	    this.quantified = quantified;
-	    this.args.AddRange(variables);
-	    this.args.Add(quantified);
-	}
+        public QuantifiedSentence(String quantifier, List<Variable> variables,
+               Sentence quantified)
+        {
+            this.quantifier = quantifier;
+            this.variables.AddRange(variables);
+            this.quantified = quantified;
+            args.AddRange(variables);
+            args.Add(quantified);
+        }
 
-	public String getQuantifier()
-	{
-	    return quantifier;
-	}
+        public String getQuantifier()
+        {
+            return quantifier;
+        }
 
-	public List<Variable> getVariables()
-	{
-	    return new ReadOnlyCollection<Variable>(variables).ToList<Variable>();
-	}
+        public List<Variable> getVariables()
+        {
+            return new ReadOnlyCollection<Variable>(variables).ToList<Variable>();
+        }
 
-	public Sentence getQuantified()
-	{
-	    return quantified;
-	}
+        public Sentence getQuantified()
+        {
+            return quantified;
+        }
 
-	// START-Sentence
+        // START-Sentence
 
-	public String getSymbolicName()
-	{
-	    return getQuantifier();
-	}
+        public String getSymbolicName()
+        {
+            return getQuantifier();
+        }
 
-	public bool isCompound()
-	{
-	    return true;
-	}
+        public bool isCompound()
+        {
+            return true;
+        }
 
-	public List<FOLNode> getArgs()
-	{
-	    return new ReadOnlyCollection<FOLNode>(args).ToList<FOLNode>();
-	}
+        public List<FOLNode> getArgs()
+        {
+            return new ReadOnlyCollection<FOLNode>(args).ToList<FOLNode>();
+        }
 
-	public Object accept(FOLVisitor v, Object arg)
-	{
-	    return v.visitQuantifiedSentence(this, arg);
-	}
+        public Object accept(FOLVisitor v, Object arg)
+        {
+            return v.visitQuantifiedSentence(this, arg);
+        }
 
-	public FOLNode copy()
-	{
-	    List<Variable> copyVars = new List<Variable>();
-	    foreach (Variable v in variables)
-	    {
-		copyVars.Add((Variable)v.copy());
-	    }
-	    return new QuantifiedSentence(quantifier, copyVars, quantified.copySentence());
-	}
+        public FOLNode copy()
+        {
+            List<Variable> copyVars = new List<Variable>();
+            foreach (Variable v in variables)
+            {
+                copyVars.Add((Variable)v.copy());
+            }
+            return new QuantifiedSentence(quantifier, copyVars, quantified.copySentence());
+        }
 
         public Sentence copySentence()
         {
@@ -84,54 +83,54 @@ namespace aima.core.logic.fol.parsing.ast
 
         // END-Sentence
 
-	public override bool Equals(Object o)
-	{
+        public override bool Equals(Object o)
+        {
 
-	    if (this == o)
-	    {
-		return true;
-	    }
-	    if ((o == null) || !(o is QuantifiedSentence))
-	    {
-		return false;
-	    }
-	    QuantifiedSentence cs = (QuantifiedSentence)o;
-	    return cs.quantifier.Equals(quantifier)
-			    && cs.variables.Equals(variables)
-			    && cs.quantified.Equals(quantified);
-	}
+            if (this == o)
+            {
+                return true;
+            }
+            if ((o == null) || !(o is QuantifiedSentence))
+            {
+                return false;
+            }
+            QuantifiedSentence cs = (QuantifiedSentence)o;
+            return cs.quantifier.Equals(quantifier)
+                    && cs.variables.Equals(variables)
+                    && cs.quantified.Equals(quantified);
+        }
 
-	public override int GetHashCode()
-	{
-	    if (0 == hashCode)
-	    {
-		hashCode = 17;
-		hashCode = 37 * hashCode + quantifier.GetHashCode();
-		foreach (Variable v in variables)
-		{
-		    hashCode = 37 * hashCode + v.GetHashCode();
-		}
-		hashCode = hashCode * 37 + quantified.GetHashCode();
-	    }
-	    return hashCode;
-	}
+        public override int GetHashCode()
+        {
+            if (0 == hashCode)
+            {
+                hashCode = 17;
+                hashCode = 37 * hashCode + quantifier.GetHashCode();
+                foreach (Variable v in variables)
+                {
+                    hashCode = 37 * hashCode + v.GetHashCode();
+                }
+                hashCode = hashCode * 37 + quantified.GetHashCode();
+            }
+            return hashCode;
+        }
 
-	public override String ToString()
-	{
-	    if (null == stringRep)
-	    {
-		StringBuilder sb = new StringBuilder();
-		sb.Append(quantifier);
-		sb.Append(" ");
-		foreach (Variable v in variables)
-		{
-		    sb.Append(v.ToString());
-		    sb.Append(" ");
-		}
-		sb.Append(quantified.ToString());
-		stringRep = sb.ToString();
-	    }
-	    return stringRep;
-	}
+        public override String ToString()
+        {
+            if (null == stringRep)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(quantifier);
+                sb.Append(" ");
+                foreach (Variable v in variables)
+                {
+                    sb.Append(v.ToString());
+                    sb.Append(" ");
+                }
+                sb.Append(quantified.ToString());
+                stringRep = sb.ToString();
+            }
+            return stringRep;
+        }
     }
 }

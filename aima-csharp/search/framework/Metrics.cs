@@ -9,13 +9,13 @@ namespace aima.core.search.framework
      * @author Ravi Mohan
      * @author Ruediger Lunde
      */
-     public class Metrics
+    public class Metrics
     {
-        private Dictionary<String, String> hash;
+        private readonly Dictionary<String, String> hash;
 
         public Metrics()
         {
-            this.hash = new Dictionary<String, String>();
+            hash = new Dictionary<String, String>();
         }
 
         public void set(String name, int i)

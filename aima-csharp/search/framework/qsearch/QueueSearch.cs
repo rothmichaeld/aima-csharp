@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Threading;
 using aima.core.agent;
-using aima.core.util;
 using aima.core.search.framework.problem;
+using System.Collections.Generic;
 
 namespace aima.core.search.framework.qsearch
 {
@@ -15,12 +13,12 @@ namespace aima.core.search.framework.qsearch
      * @author Mike Stampone
      * @author Ruediger Lunde
      */
-     public abstract class QueueSearch
+    public abstract class QueueSearch
     {
         public const System.String METRIC_NODES_EXPANDED = "nodesExpanded";
         public const System.String METRIC_QUEUE_SIZE = "queueSize";
-	public const System.String METRIC_MAX_QUEUE_SIZE = "maxQueueSize";
-	public const System.String METRIC_PATH_COST = "pathCost";
+        public const System.String METRIC_MAX_QUEUE_SIZE = "maxQueueSize";
+        public const System.String METRIC_PATH_COST = "pathCost";
 
         protected readonly NodeExpander nodeExpander;
         protected Queue<Node> frontier;
@@ -54,7 +52,7 @@ namespace aima.core.search.framework.qsearch
     	 *         containing a single NoOp Action if already at the goal, or an
     	 *         empty list if the goal could not be found.
     	 */
-         public virtual List<Action> search(Problem problem, Queue<Node> frontier)
+        public virtual List<Action> search(Problem problem, Queue<Node> frontier)
         {
             this.frontier = frontier;
             clearInstrumentation();
@@ -62,13 +60,13 @@ namespace aima.core.search.framework.qsearch
             Node root = nodeExpander.createRootNode(problem.getInitialState());
             if (earlyGoalCheck)
             {
-                if(SearchUtils.isGoalState(problem, root))
+                if (SearchUtils.isGoalState(problem, root))
                 {
                     return getSolution(root);
                 }
             }
             addToFrontier(root);
-            while(!(frontier.Count == 0))
+            while (!(frontier.Count == 0))
             {
                 // choose a leaf node and remove it from the frontier
                 Node nodeToExpand = removeFromFrontier();
@@ -78,24 +76,25 @@ namespace aima.core.search.framework.qsearch
                 {
                     // if the node contains a goal state then return the
                     // corresponding solution
-                    if(SearchUtils.isGoalState(problem, nodeToExpand))
+                    if (SearchUtils.isGoalState(problem, nodeToExpand))
                     {
                         return getSolution(nodeToExpand);
                     }
                 }
                 // expand the chosen node, adding the resulting nodes to the
                 // frontier
-                foreach(Node successor in nodeExpander.expand(nodeToExpand, problem))
+                foreach (Node successor in nodeExpander.expand(nodeToExpand, problem))
                 {
                     if (earlyGoalCheck)
                     {
-                        if(SearchUtils.isGoalState(problem, successor))
+                        if (SearchUtils.isGoalState(problem, successor))
                         {
                             return getSolution(successor);
                         }
                     }
                     addToFrontier(successor)
-;                }
+;
+                }
             }
             // if the frontier is empty then return failure
             return SearchUtils.failure();
@@ -127,7 +126,7 @@ namespace aima.core.search.framework.qsearch
 	 */
         public void setEarlyGoalCheck(bool state)
         {
-            this.earlyGoalCheck = state;
+            earlyGoalCheck = state;
         }
 
         /**

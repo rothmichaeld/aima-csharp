@@ -9,14 +9,14 @@ namespace aima.core.logic.fol.inference.proof
      */
     public interface ProofStep
     {
-	int getStepNumber();
+        int getStepNumber();
 
-	void setStepNumber(int step);
+        void setStepNumber(int step);
 
-	List<ProofStep> getPredecessorSteps();
+        List<ProofStep> getPredecessorSteps();
 
-	String getProof();
+        String getProof();
 
-	String getJustification();
+        String getJustification();
     }
 }

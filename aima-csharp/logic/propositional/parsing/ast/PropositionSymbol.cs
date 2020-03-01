@@ -24,12 +24,12 @@ namespace aima.core.logic.propositional.parsing.ast
 
     public class PropositionSymbol : AtomicSentence
     {
-        public static readonly String TRUE_SYMBOL  = "True";
-	    public static readonly String FALSE_SYMBOL = "False";
-	    public static readonly PropositionSymbol TRUE  = new PropositionSymbol(TRUE_SYMBOL);
+        public static readonly String TRUE_SYMBOL = "True";
+        public static readonly String FALSE_SYMBOL = "False";
+        public static readonly PropositionSymbol TRUE = new PropositionSymbol(TRUE_SYMBOL);
         public static readonly PropositionSymbol FALSE = new PropositionSymbol(FALSE_SYMBOL);
         //
-        private String symbol;
+        private readonly String symbol;
 
         /**
          * Constructor.
@@ -139,7 +139,7 @@ namespace aima.core.logic.propositional.parsing.ast
         public static bool isPropositionSymbolIdentifierPart(char ch)
         {
             CodeDomProvider provider = CodeDomProvider.CreateProvider("C#");
-            return provider.IsValidIdentifier("a"+ch);
+            return provider.IsValidIdentifier("a" + ch);
         }
 
         /**
@@ -158,7 +158,7 @@ namespace aima.core.logic.propositional.parsing.ast
             {
                 return true;
             }
-            if ((o == null) || (this.GetType() != o.GetType()))
+            if ((o == null) || (GetType() != o.GetType()))
             {
                 return false;
             }
@@ -167,7 +167,7 @@ namespace aima.core.logic.propositional.parsing.ast
 
         }
 
-        
+
         public override int GetHashCode()
         {
             return symbol.GetHashCode();

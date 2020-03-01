@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using aima.core.agent;
 using aima.core.search.framework.problem;
+using System.Collections.Generic;
 
 namespace aima.core.search.framework
-{    
+{
     /**
      * A specialization of the GoalTest interface so that it is possible to check
      * the solution once a Goal has been identified to determine if it is

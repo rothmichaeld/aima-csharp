@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using aima.core.search.framework;
 using aima.core.search.framework.problem;
+using System;
 
 namespace aima.core.search.online
 {
@@ -30,7 +28,25 @@ namespace aima.core.search.online
 
         protected GoalTest goalTest;
 
-	/**
+        /**
+             * Constructs an online search problem with the specified action function,
+             * goal test, and a default step cost function.
+             * 
+             * @param actionsFunction
+             *            ACTIONS(s), which returns a list of actions allowed in state s
+             * @param goalTest
+             *            GOAL-TEST(s), which the agent can apply to a single state
+             *            description to determine if it is a goal state
+             */
+        public OnlineSearchProblem(ActionsFunction actionsFunction,
+                     GoalTest goalTest)
+        {
+            this.actionsFunction = actionsFunction;
+            this.goalTest = goalTest;
+            stepCostFunction = new DefaultStepCostFunction();
+        }
+
+        /**
          * Constructs an online search problem with the specified action function,
          * goal test, and a default step cost function.
          * 
@@ -39,73 +55,55 @@ namespace aima.core.search.online
          * @param goalTest
          *            GOAL-TEST(s), which the agent can apply to a single state
          *            description to determine if it is a goal state
+         * @param stepCostFunction
+         *            the step-cost function c(s, a, s') - note that this cannot be
+         *            used until the agent knows that s' is the outcome
          */
-	public OnlineSearchProblem(ActionsFunction actionsFunction,
-                 GoalTest goalTest)
-	{
-	    this.actionsFunction = actionsFunction;
-	    this.goalTest = goalTest;
-	    this.stepCostFunction = new DefaultStepCostFunction();
-	}
+        public OnlineSearchProblem(ActionsFunction actionsFunction,
+            GoalTest goalTest, StepCostFunction stepCostFunction)
+        {
+            this.actionsFunction = actionsFunction;
+            this.goalTest = goalTest;
+            this.stepCostFunction = stepCostFunction;
+        }
 
-	/**
-	 * Constructs an online search problem with the specified action function,
-	 * goal test, and a default step cost function.
-	 * 
-	 * @param actionsFunction
-	 *            ACTIONS(s), which returns a list of actions allowed in state s
-	 * @param goalTest
-	 *            GOAL-TEST(s), which the agent can apply to a single state
-	 *            description to determine if it is a goal state
-	 * @param stepCostFunction
-	 *            the step-cost function c(s, a, s') - note that this cannot be
-	 *            used until the agent knows that s' is the outcome
-	 */
-	public OnlineSearchProblem(ActionsFunction actionsFunction,
-		GoalTest goalTest, StepCostFunction stepCostFunction)
-	{
-	    this.actionsFunction = actionsFunction;
-	    this.goalTest = goalTest;
-	    this.stepCostFunction = stepCostFunction;
-	}
+        /**
+         * Returns the action function of this online search problem.
+         * 
+         * @return the action function of this online search problem.
+         */
+        public ActionsFunction getActionsFunction()
+        {
+            return actionsFunction;
+        }
 
-	/**
-	 * Returns the action function of this online search problem.
-	 * 
-	 * @return the action function of this online search problem.
-	 */
-	public ActionsFunction getActionsFunction()
-	{
-	    return actionsFunction;
-	}
-
-	/**
-	 * Returns <code>true</code> if the given state is a goal state.
-	 * 
-	 * @param state
-	 *            an object representing a state
-	 * 
-	 * @return <code>true</code> if the given state is a goal state.
-	 */
-	public bool isGoalState(Object state)
-	{
+        /**
+         * Returns <code>true</code> if the given state is a goal state.
+         * 
+         * @param state
+         *            an object representing a state
+         * 
+         * @return <code>true</code> if the given state is a goal state.
+         */
+        public bool isGoalState(Object state)
+        {
             return goalTest.isGoalState(state);
-	}
+        }
 
-	/**
-	 * Returns the step cost function of this online search problem.
-	 * 
-	 * @return the step cost function of this online search problem.
-	 */
-	public StepCostFunction getStepCostFunction()
-	{
-	    return stepCostFunction;
-	}
-				
-	// PROTECTED METHODS
-		
-	protected OnlineSearchProblem()
-	{
+        /**
+         * Returns the step cost function of this online search problem.
+         * 
+         * @return the step cost function of this online search problem.
+         */
+        public StepCostFunction getStepCostFunction()
+        {
+            return stepCostFunction;
+        }
+
+        // PROTECTED METHODS
+
+        protected OnlineSearchProblem()
+        {
 
         }
     }

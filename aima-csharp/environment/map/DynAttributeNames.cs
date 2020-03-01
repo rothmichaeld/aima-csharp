@@ -16,15 +16,15 @@ namespace aima.core.environment.map
      */
     public class DynAttributeNames
     {
-	/**
-	 * Name of a dynamic attribute, which contains the current location of the
-	 * agent. Expected value type: String.
-	 */
-	public static readonly String AGENT_LOCATION = "location";
-	/**
-	 * Name of a dynamic attribute, which tells the agent where it is. Expected
-	 * value type: String.
-	 */
-	public static readonly String PERCEPT_IN = "in";
+        /**
+         * Name of a dynamic attribute, which contains the current location of the
+         * agent. Expected value type: String.
+         */
+        public static readonly String AGENT_LOCATION = "location";
+        /**
+         * Name of a dynamic attribute, which tells the agent where it is. Expected
+         * value type: String.
+         */
+        public static readonly String PERCEPT_IN = "in";
     }
 }

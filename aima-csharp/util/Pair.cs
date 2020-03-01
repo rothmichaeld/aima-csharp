@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace aima.core.util
 {
@@ -10,9 +9,9 @@ namespace aima.core.util
      */
     public class Pair<X, Y>
     {
-        private X a;
+        private readonly X a;
 
-        private Y b;
+        private readonly Y b;
 
         /**
     	 * Constructs a Pair from two given elements

@@ -1,5 +1,3 @@
-using System;
-
 namespace aima.core.util
 {
     /**
@@ -11,31 +9,31 @@ namespace aima.core.util
      */
     public class MockRandomizer : Randomizer
     {
-	private double[] values;
-	private int index;
+        private readonly double[] values;
+        private int index;
 
-	/**
-	 * 
-	 * @param values
-	 *            the set of predetermined random values to loop over.
-	 */
-	public MockRandomizer(double[] values)
-	{
-	    this.values = new double[values.Length];
-	    System.Array.Copy(values, 0, this.values, 0, values.Length);
-	    this.index = 0;
-	}
+        /**
+         * 
+         * @param values
+         *            the set of predetermined random values to loop over.
+         */
+        public MockRandomizer(double[] values)
+        {
+            this.values = new double[values.Length];
+            System.Array.Copy(values, 0, this.values, 0, values.Length);
+            index = 0;
+        }
 
-	// START-Randomizer
-	public double nextDouble()
-	{
-	    if(index == values.Length)
-	    {
-		index = 0;
-	    }
-	    return values[index++];
-	}
+        // START-Randomizer
+        public double nextDouble()
+        {
+            if (index == values.Length)
+            {
+                index = 0;
+            }
+            return values[index++];
+        }
 
-	//END-Randomizer
+        //END-Randomizer
     }
 }

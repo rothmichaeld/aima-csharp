@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,7 +27,7 @@ namespace aima.core.util
     	 */
         public static List<T> union<T>(List<T> s1, List<T> s2)
         {
-            if(s1 == s2)
+            if (s1 == s2)
             {
                 return s1;
             }

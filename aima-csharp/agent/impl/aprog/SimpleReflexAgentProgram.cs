@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using aima.core.agent;
-using aima.core.agent.impl;
 using aima.core.agent.impl.aprog.simplerule;
+using System.Collections.Generic;
 
 namespace aima.core.agent.impl.aprog
 {
@@ -27,10 +24,10 @@ namespace aima.core.agent.impl.aprog
      * @author Mike Stampone
      * 
      */
-     public class SimpleReflexAgentProgram : AgentProgram
+    public class SimpleReflexAgentProgram : AgentProgram
     {
         // persistent: rules, a set of condition-action rules
-        private HashSet<Rule> rules;
+        private readonly HashSet<Rule> rules;
 
         /**
 	 * Constructs a SimpleReflexAgentProgram with a set of condition-action
@@ -39,7 +36,7 @@ namespace aima.core.agent.impl.aprog
 	 * @param ruleSet
 	 *            a set of condition-action rules
 	 */
-         public SimpleReflexAgentProgram(HashSet<Rule> ruleSet)
+        public SimpleReflexAgentProgram(HashSet<Rule> ruleSet)
         {
             rules = ruleSet;
         }

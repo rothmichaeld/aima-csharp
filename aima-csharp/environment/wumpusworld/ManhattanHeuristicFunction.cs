@@ -1,6 +1,6 @@
+using aima.core.search.framework;
 using System;
 using System.Collections.Generic;
-using aima.core.search.framework;
 
 namespace aima.core.environment.wumpusworld
 {
@@ -13,34 +13,34 @@ namespace aima.core.environment.wumpusworld
      */
     public class ManhattanHeuristicFunction : HeuristicFunction
     {
-	List<Room> goals = new List<Room>();
+        private readonly List<Room> goals = new List<Room>();
 
-	public ManhattanHeuristicFunction(HashSet<Room> goals)
-	{
-	    this.goals.AddRange(goals);
-	}
+        public ManhattanHeuristicFunction(HashSet<Room> goals)
+        {
+            this.goals.AddRange(goals);
+        }
 
-	public double h(Object state)
-	{
-	    AgentPosition pos = (AgentPosition)state;
-	    int nearestGoalDist = int.MaxValue;
-	    foreach (Room g in goals)
-	    {
-		int tmp = evaluateManhattanDistanceOf(pos.getX(), pos.getY(), g.getX(), g.getY());
+        public double h(Object state)
+        {
+            AgentPosition pos = (AgentPosition)state;
+            int nearestGoalDist = int.MaxValue;
+            foreach (Room g in goals)
+            {
+                int tmp = evaluateManhattanDistanceOf(pos.getX(), pos.getY(), g.getX(), g.getY());
 
-		if (tmp < nearestGoalDist)
-		{
-		    nearestGoalDist = tmp;
-		}
-	    }
-	    return nearestGoalDist;
-	}
+                if (tmp < nearestGoalDist)
+                {
+                    nearestGoalDist = tmp;
+                }
+            }
+            return nearestGoalDist;
+        }
 
-	// PRIVATE
+        // PRIVATE
 
-	private int evaluateManhattanDistanceOf(int x1, int y1, int x2, int y2)
-	{
-	    return Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
-	}
+        private int evaluateManhattanDistanceOf(int x1, int y1, int x2, int y2)
+        {
+            return Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
+        }
     }
 }

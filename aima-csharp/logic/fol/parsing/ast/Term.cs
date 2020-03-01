@@ -8,8 +8,8 @@ namespace aima.core.logic.fol.parsing.ast
      */
     public interface Term : FOLNode
     {
-	List<Term> getArgs();
+        List<Term> getArgs();
 
-	Term copy();
+        Term copy();
     }
 }

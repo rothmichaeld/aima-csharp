@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using aima.core.agent;
 using aima.core.search.framework.problem;
+using System.Collections.Generic;
 
 namespace aima.core.search.framework
 {
@@ -26,7 +26,7 @@ namespace aima.core.search.framework
 	 * parent node state to the specified state, creates a new node for the
 	 * specified state, adds it as child of the provided parent, and returns it.
 	 */
-         public Node createNode(System.Object state, Node parent, Action action, double stepCost)
+        public Node createNode(System.Object state, Node parent, Action action, double stepCost)
         {
             return new Node(state, parent, action, parent.PathCost + stepCost);
         }
@@ -79,7 +79,7 @@ namespace aima.core.search.framework
 	 * All node listeners added to this list get informed whenever a node is
 	 * expanded.
 	 */
-        private List<NodeListener> nodeListeners = new List<NodeListener>();
+        private readonly List<NodeListener> nodeListeners = new List<NodeListener>();
 
         /** Counts the number of {@link #expand(Node, Problem)} calls. */
         private int counter;

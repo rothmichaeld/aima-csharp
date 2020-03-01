@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using aima.core.logic.fol.inference;
 using aima.core.logic.fol.kb.data;
+using System.Collections.Generic;
 
 namespace aima.core.logic.fol.inference.trace
 {
@@ -11,15 +9,15 @@ namespace aima.core.logic.fol.inference.trace
      */
     public interface FOLTFMResolutionTracer
     {
-	void stepStartWhile(HashSet<Clause> clauses, int totalNoClauses,
-			int totalNoNewCandidateClauses);
+        void stepStartWhile(HashSet<Clause> clauses, int totalNoClauses,
+                int totalNoNewCandidateClauses);
 
-	void stepOuterFor(Clause i);
+        void stepOuterFor(Clause i);
 
-	void stepInnerFor(Clause i, Clause j);
+        void stepInnerFor(Clause i, Clause j);
 
-	void stepResolved(Clause iFactor, Clause jFactor, HashSet<Clause> resolvents);
+        void stepResolved(Clause iFactor, Clause jFactor, HashSet<Clause> resolvents);
 
-	void stepFinished(HashSet<Clause> clauses, InferenceResult result);
+        void stepFinished(HashSet<Clause> clauses, InferenceResult result);
     }
 }

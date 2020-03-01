@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using aima.core.agent;
 using aima.core.agent.impl;
 using aima.core.search.framework.problem;
+using System.Collections.Generic;
 
 namespace aima.core.search.framework
 {
@@ -12,18 +12,18 @@ namespace aima.core.search.framework
      * @author Ruediger Lunde
      * 
      */
-     public class SearchUtils
+    public class SearchUtils
     {
         /**
 	 * Returns the list of actions corresponding to the complete path to the
 	 * given node or NoOp if path length is one.
-	 */    
+	 */
         public static List<Action> getSequenceOfActions(Node node)
         {
             List<Node> nodes = node.GetPathFromRoot();
             List<Action> actions = new List<Action>();
 
-            if(nodes.Count == 1)
+            if (nodes.Count == 1)
             {
                 // I'm at the root node, this indicates I started at the
                 // Goal node, therefore just return a NoOp
@@ -51,17 +51,17 @@ namespace aima.core.search.framework
         /** Checks whether a list of actions is empty. */
         public static bool isFailure(List<Action> actions)
         {
-            if(actions.Count == 0)
+            if (actions.Count == 0)
             {
                 return true;
             }
             else
             {
                 return false;
-            }      
+            }
 
         }
-        
+
 
         /**
 	 * Calls the goal test of the problem and - if the goal test is effectively

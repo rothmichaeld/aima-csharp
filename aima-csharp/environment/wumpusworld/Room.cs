@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace aima.core.environment.wumpusworld
 {
     /**
@@ -14,65 +12,66 @@ namespace aima.core.environment.wumpusworld
      */
     public class Room
     {
-	private int x = 1;
-	private int y = 1;
+        private readonly int x = 1;
+        private readonly int y = 1;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param x
-	 *            the room's x location.
-	 * @param y
-	 *            the room's y location.
-	 */
-	public Room(int x, int y)
-	{
-	    this.x = x;
-	    this.y = y;
-	}
+        /**
+         * Constructor.
+         * 
+         * @param x
+         *            the room's x location.
+         * @param y
+         *            the room's y location.
+         */
+        public Room(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
 
-	/**
-	 * 
-	 * @return the room's x location.
-	 */
-	public int getX()
-	{
-	    return x;
-	}
+        /**
+         * 
+         * @return the room's x location.
+         */
+        public int getX()
+        {
+            return x;
+        }
 
-	/**
-	 *
-	 * @return the room's y location.
-	 */
-	public int getY()
-	{
-	    return y;
-	}
+        /**
+         *
+         * @return the room's y location.
+         */
+        public int getY()
+        {
+            return y;
+        }
 
-	public string toString()
-	{
-	    return "[" + x + "," + y + "]";	    
-	}
-	
-	public bool equals(object o)
-	{
-	    if (o != null && o is Room) {
-		Room r = (Room)o;
-		if (x == r.x && y == r.y)
-		{
-		    return true;
-		}
-		return false;
-	    }
-	    return false;
-	}
+        public string toString()
+        {
+            return "[" + x + "," + y + "]";
+        }
 
-	public int hashCode()
-	{
-	    int result = 17;
-	    result = 37 * result + getX();
-	    result = 43 * result + getY();
-	    return result;
-	}
+        public bool equals(object o)
+        {
+            if (o != null && o is Room)
+            {
+                Room r = (Room)o;
+                if (x == r.x && y == r.y)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
+        public int hashCode()
+        {
+            int result = 17;
+            result = 37 * result + getX();
+            result = 43 * result + getY();
+            return result;
+        }
     }
 }

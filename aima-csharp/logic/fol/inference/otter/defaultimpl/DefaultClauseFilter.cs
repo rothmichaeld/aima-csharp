@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using aima.core.logic.fol.inference.otter;
 using aima.core.logic.fol.kb.data;
+using System.Collections.Generic;
 
 namespace aima.core.logic.fol.inference.otter.defaultimpl
 {
@@ -11,18 +9,18 @@ namespace aima.core.logic.fol.inference.otter.defaultimpl
      */
     public class DefaultClauseFilter : ClauseFilter
     {
-	public DefaultClauseFilter()
-	{
+        public DefaultClauseFilter()
+        {
 
-	}
+        }
 
-	// START-ClauseFilter
+        // START-ClauseFilter
 
-	public HashSet<Clause> filter(HashSet<Clause> clauses)
-	{
-	    return clauses;
-	}
+        public HashSet<Clause> filter(HashSet<Clause> clauses)
+        {
+            return clauses;
+        }
 
-	// END-ClauseFilter
+        // END-ClauseFilter
     }
 }

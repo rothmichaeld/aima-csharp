@@ -11,53 +11,53 @@ namespace aima.core.environment.map
      */
     public class Scenario
     {
-	/**
-	 * A map-based environment. Note that the contained map must be of type
-	 * {@link ExtendableMap}.
-	 */
-	private readonly MapEnvironment env;
-	/** A map reflecting the knowledge of the agent about the environment. */
-	private readonly Map agentMap;
-	/** Initial location of the agent. */
-	private readonly String initAgentLoc;
+        /**
+         * A map-based environment. Note that the contained map must be of type
+         * {@link ExtendableMap}.
+         */
+        private readonly MapEnvironment env;
+        /** A map reflecting the knowledge of the agent about the environment. */
+        private readonly Map agentMap;
+        /** Initial location of the agent. */
+        private readonly String initAgentLoc;
 
-	/**
-	 * Creates a scenario.
-	 * 
-	 * @param env
-	 *            a map-based environment. Note that the contained map must be
-	 *            of type {@link ExtendableMap}
-	 * @param agentMap
-	 *            a map reflecting the knowledge of the agent about the
-	 *            environment
-	 * @param agentLoc
-	 *            initial location of the agent
-	 */
-	public Scenario(MapEnvironment env, Map agentMap, String agentLoc)
-	{
-	    this.agentMap = agentMap;
-	    this.env = env;
-	    this.initAgentLoc = agentLoc;
-	}
+        /**
+         * Creates a scenario.
+         * 
+         * @param env
+         *            a map-based environment. Note that the contained map must be
+         *            of type {@link ExtendableMap}
+         * @param agentMap
+         *            a map reflecting the knowledge of the agent about the
+         *            environment
+         * @param agentLoc
+         *            initial location of the agent
+         */
+        public Scenario(MapEnvironment env, Map agentMap, String agentLoc)
+        {
+            this.agentMap = agentMap;
+            this.env = env;
+            initAgentLoc = agentLoc;
+        }
 
-	public MapEnvironment getEnv()
-	{
-	    return env;
-	}
+        public MapEnvironment getEnv()
+        {
+            return env;
+        }
 
-	public Map getEnvMap()
-	{
-	    return env.getMap();
-	}
+        public Map getEnvMap()
+        {
+            return env.getMap();
+        }
 
-	public Map getAgentMap()
-	{
-	    return agentMap;
-	}
+        public Map getAgentMap()
+        {
+            return agentMap;
+        }
 
-	public String getInitAgentLocation()
-	{
-	    return initAgentLoc;
-	}
+        public String getInitAgentLocation()
+        {
+            return initAgentLoc;
+        }
     }
 }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using aima.core.agent.impl;
 
 namespace aima.core.agent.impl.aprog.simplerule
 {
@@ -10,13 +8,13 @@ namespace aima.core.agent.impl.aprog.simplerule
      * @author Ciaran O'Reilly
      * 
      */
-     public abstract class Condition
+    public abstract class Condition
     {
         public abstract bool evaluate(ObjectWithDynamicAttributes p);
 
         public bool Equals(Object o)
         {
-            if(o == null || !(o is Condition))
+            if (o == null || !(o is Condition))
             {
                 return base.Equals(o);
             }

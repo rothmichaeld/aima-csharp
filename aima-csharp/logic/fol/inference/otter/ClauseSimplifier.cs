@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using aima.core.logic.fol.kb.data;
 
 namespace aima.core.logic.fol.inference.otter
@@ -10,6 +8,6 @@ namespace aima.core.logic.fol.inference.otter
      */
     public interface ClauseSimplifier
     {
-	Clause simplify(Clause c);
+        Clause simplify(Clause c);
     }
 }

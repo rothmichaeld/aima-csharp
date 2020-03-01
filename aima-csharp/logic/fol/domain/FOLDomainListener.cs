@@ -1,5 +1,3 @@
-using System;
-
 namespace aima.core.logic.fol.domain
 {
     /**
@@ -8,10 +6,10 @@ namespace aima.core.logic.fol.domain
      */
     public interface FOLDomainListener
     {
-	void skolemConstantAdded(FOLDomainSkolemConstantAddedEvent _event);
+        void skolemConstantAdded(FOLDomainSkolemConstantAddedEvent _event);
 
-	void skolemFunctionAdded(FOLDomainSkolemFunctionAddedEvent _event);
+        void skolemFunctionAdded(FOLDomainSkolemFunctionAddedEvent _event);
 
-	void answerLiteralNameAdded(FOLDomainAnswerLiteralAddedEvent _event);
+        void answerLiteralNameAdded(FOLDomainAnswerLiteralAddedEvent _event);
     }
 }

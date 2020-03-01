@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace aima.core.agent
 {
@@ -7,7 +6,7 @@ namespace aima.core.agent
      * @author Ciaran O'Reilly
      * 
      */
-     public interface EnvironmentViewNotifier
+    public interface EnvironmentViewNotifier
     {
         /**
 	 * A simple notification message, to be forwarded to an Environment's

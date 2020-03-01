@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace aima.core.logic.fol.parsing.ast
 {
     /**
@@ -8,6 +6,6 @@ namespace aima.core.logic.fol.parsing.ast
      */
     public interface Sentence : FOLNode
     {
-	Sentence copySentence();
+        Sentence copySentence();
     }
 }

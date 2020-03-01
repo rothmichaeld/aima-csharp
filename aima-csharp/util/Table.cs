@@ -10,9 +10,9 @@ namespace aima.core.util
      */
     public class Table<RowHeaderType, ColumnHeaderType, ValueType> // where ValueType : struct
     {
-        private List<RowHeaderType> rowHeaders;
-        private List<ColumnHeaderType> columnHeaders;
-        private Dictionary<RowHeaderType, Dictionary<ColumnHeaderType, ValueType>> rows;
+        private readonly List<RowHeaderType> rowHeaders;
+        private readonly List<ColumnHeaderType> columnHeaders;
+        private readonly Dictionary<RowHeaderType, Dictionary<ColumnHeaderType, ValueType>> rows;
 
         public Table(List<RowHeaderType> rowHeaders,
                 List<ColumnHeaderType> columnHeaders)
@@ -20,7 +20,7 @@ namespace aima.core.util
 
             this.rowHeaders = rowHeaders;
             this.columnHeaders = columnHeaders;
-            this.rows = new Dictionary<RowHeaderType, Dictionary<ColumnHeaderType, ValueType>>();
+            rows = new Dictionary<RowHeaderType, Dictionary<ColumnHeaderType, ValueType>>();
             foreach (RowHeaderType rowHeader in rowHeaders)
             {
                 rows.Add(rowHeader, new Dictionary<ColumnHeaderType, ValueType>());
@@ -69,24 +69,24 @@ namespace aima.core.util
             return buf.ToString();
         }
 
-        class Row<R>
+        private class Row<R>
         {
-            private Dictionary<ColumnHeaderType, ValueType> c;
+            private readonly Dictionary<ColumnHeaderType, ValueType> c;
 
             public Row()
             {
 
-                this.c = new Dictionary<ColumnHeaderType, ValueType>();
+                c = new Dictionary<ColumnHeaderType, ValueType>();
             }
 
             public Dictionary<ColumnHeaderType, ValueType> cells()
             {
-                return this.c;
+                return c;
             }
 
         }
 
-        class Cell<ValueHeaderType>
+        private class Cell<ValueHeaderType>
         {
             private ValueHeaderType val;
 
@@ -97,12 +97,12 @@ namespace aima.core.util
 
             public Cell(ValueHeaderType value)
             {
-                this.val = value;
+                val = value;
             }
 
             public void set(ValueHeaderType value)
             {
-                this.val = value;
+                val = value;
             }
 
             public ValueHeaderType value()

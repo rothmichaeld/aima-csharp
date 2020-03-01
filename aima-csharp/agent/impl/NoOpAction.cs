@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace aima.core.agent.impl
 {
     public class NoOpAction : DynamicAction
@@ -16,7 +13,7 @@ namespace aima.core.agent.impl
         //END-Action
         private NoOpAction() : base("NoOp")
         {
-            
+
         }
     }
 }

@@ -1,8 +1,8 @@
+using aima.core.logic.fol.kb.data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Collections.ObjectModel;
-using aima.core.logic.fol.kb.data;
+using System.Linq;
 
 namespace aima.core.logic.fol.inference.proof
 {
@@ -12,34 +12,34 @@ namespace aima.core.logic.fol.inference.proof
      */
     public class ProofStepChainDropped : AbstractProofStep
     {
-	private List<ProofStep> predecessors = new List<ProofStep>();
-	private Chain dropped = null;
-	private Chain droppedOff = null;
+        private readonly List<ProofStep> predecessors = new List<ProofStep>();
+        private readonly Chain dropped = null;
+        private readonly Chain droppedOff = null;
 
-	public ProofStepChainDropped(Chain dropped, Chain droppedOff)
-	{
-	    this.dropped = dropped;
-	    this.droppedOff = droppedOff;
-	    this.predecessors.Add(droppedOff.getProofStep());
-	}
-	
-	// START-ProofStep
+        public ProofStepChainDropped(Chain dropped, Chain droppedOff)
+        {
+            this.dropped = dropped;
+            this.droppedOff = droppedOff;
+            predecessors.Add(droppedOff.getProofStep());
+        }
 
-	public override List<ProofStep> getPredecessorSteps()
-	{
-	    return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
-	}
+        // START-ProofStep
 
-	public override String getProof()
-	{
-	    return dropped.ToString();
-	}
+        public override List<ProofStep> getPredecessorSteps()
+        {
+            return new ReadOnlyCollection<ProofStep>(predecessors).ToList<ProofStep>();
+        }
 
-	public override String getJustification()
-	{
-	    return "Dropped: " + droppedOff.getProofStep().getStepNumber();
-	}
+        public override String getProof()
+        {
+            return dropped.ToString();
+        }
 
-	// END-ProofStep
+        public override String getJustification()
+        {
+            return "Dropped: " + droppedOff.getProofStep().getStepNumber();
+        }
+
+        // END-ProofStep
     }
 }
